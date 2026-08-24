@@ -35,6 +35,22 @@ function DealCta({ offer }: { offer: OfferDeal }) {
   );
 }
 
+function DealPrice({ offer }: { offer: OfferDeal }) {
+  return (
+    <div className="offers-price-row">
+      {offer.was ? (
+        <p className="offers-price-was">
+          Regular <s>{offer.was}</s>
+        </p>
+      ) : null}
+      <p className="offers-price-now">
+        Combo <strong>{offer.price}</strong>
+      </p>
+      <span>{offer.saveLabel}</span>
+    </div>
+  );
+}
+
 function BottleStack({ offer }: { offer: OfferDeal }) {
   return (
     <div className="offers-bottles" aria-hidden="true">
@@ -64,14 +80,10 @@ function FeaturedDeal({ offer }: { offer: OfferDeal }) {
       <div className="offers-featured-glow" aria-hidden="true" />
       <div className="offers-featured-copy">
         <em className="offers-badge">{offer.badge}</em>
-        <p className="lux-kicker">Complete home pack</p>
+        <p className="lux-kicker">Whole-house bundle</p>
         <h2>{offer.title}</h2>
         <p className="offers-lead">{offer.blurb}</p>
-        <div className="offers-price-row">
-          <strong>{offer.price}</strong>
-          {offer.was ? <s>{offer.was}</s> : null}
-          <span>{offer.saveLabel}</span>
-        </div>
+        <DealPrice offer={offer} />
         <ul className="offers-chips" aria-label="Included products">
           {offer.includes.map((item) => (
             <li key={`${item.id}-${item.label}`}>{item.label}</li>
@@ -98,11 +110,7 @@ function DealCard({ offer, index }: { offer: OfferDeal; index: number }) {
       <div className="offers-card-copy">
         <h3>{offer.title}</h3>
         <p>{offer.blurb}</p>
-        <div className="offers-price-row">
-          <strong>{offer.price}</strong>
-          {offer.was ? <s>{offer.was}</s> : null}
-          <span>{offer.saveLabel}</span>
-        </div>
+        <DealPrice offer={offer} />
         <ul className="offers-chips" aria-label="Included products">
           {offer.includes.map((item, i) => (
             <li key={`${item.id}-${item.label}-${i}`}>{item.label}</li>

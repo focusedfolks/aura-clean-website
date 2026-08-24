@@ -6,6 +6,11 @@ export type ProductId =
   | "floor"
   | "dish"
   | "combo"
+  | "combo-essential"
+  | "combo-kitchen-bath"
+  | "combo-mega"
+  | "combo-hygiene"
+  | "combo-saver"
   | "combo-kitchen"
   | "combo-shine"
   | "combo-trio"
@@ -25,7 +30,18 @@ export type OfferInclude = {
 };
 
 export type OfferDeal = {
-  id: Extract<ProductId, "combo" | "combo-kitchen" | "combo-shine" | "combo-trio">;
+  id: Extract<
+    ProductId,
+    | "combo"
+    | "combo-essential"
+    | "combo-kitchen-bath"
+    | "combo-mega"
+    | "combo-hygiene"
+    | "combo-saver"
+    | "combo-kitchen"
+    | "combo-shine"
+    | "combo-trio"
+  >;
   badge: string;
   title: string;
   blurb: string;
@@ -180,63 +196,93 @@ export const PRODUCTS: Product[] = [
 export const OFFERS: OfferDeal[] = [
   {
     id: "combo",
-    badge: "Best value",
-    title: "6-in-1 Home Care Combo",
-    blurb: "Six essentials in one pack — laundry, floor, dish, bath, toilet and hand wash for the whole home.",
-    price: "₹349",
-    was: "₹499",
-    saveLabel: "Save ₹150",
+    badge: "Biggest save",
+    title: "Ultimate Whole House Bundle",
+    blurb: "Four 1 Ltr bottles. One checkout. Toilet, bath, dishes and floors — the house, handled.",
+    price: "₹280",
+    was: "₹388",
+    saveLabel: "You save ₹108",
     theme: "featured",
     includes: [
-      { id: "laundry", label: "Laundry" },
-      { id: "floor", label: "Floor", flavor: "lavender" },
-      { id: "dish", label: "Dish" },
-      { id: "bathroom", label: "Bath" },
-      { id: "toilet", label: "Toilet" },
-      { id: "hand-wash", label: "Hand Wash", flavor: "charcoal" },
+      { id: "toilet", label: "1 Ltr Toilet Cleaner" },
+      { id: "bathroom", label: "1 Ltr Bathroom Cleaner" },
+      { id: "dish", label: "1 Ltr Dishwash" },
+      { id: "floor", label: "1 Ltr Floor Cleaner", flavor: "lavender" },
     ],
   },
   {
-    id: "combo-kitchen",
-    badge: "Kitchen deal",
-    title: "Kitchen Fresh Duo",
-    blurb: "Grease-cutting dish wash paired with lemon hand wash for a brighter sink ritual.",
-    price: "₹199",
-    was: "₹259",
-    saveLabel: "Save ₹60",
-    theme: "citrus",
-    includes: [
-      { id: "dish", label: "Dish Wash" },
-      { id: "hand-wash", label: "Hand Wash", flavor: "lemon" },
-    ],
-  },
-  {
-    id: "combo-shine",
-    badge: "Shine pair",
-    title: "Floor & Bath Shine",
-    blurb: "Lavender floor cleaner plus disinfectant bathroom spray for rooms that actually look finished.",
-    price: "₹249",
-    was: "₹319",
-    saveLabel: "Save ₹70",
-    theme: "blush",
-    includes: [
-      { id: "floor", label: "Floor", flavor: "lavender" },
-      { id: "bathroom", label: "Bathroom" },
-    ],
-  },
-  {
-    id: "combo-trio",
-    badge: "Flavour pack",
-    title: "Hand Wash Flavour Trio",
-    blurb: "Charcoal, Lemon and Rose — three fragrances so every sink in the house can pick a favourite.",
-    price: "₹299",
-    was: "₹369",
-    saveLabel: "Save ₹70",
+    id: "combo-essential",
+    badge: "Everyday trio",
+    title: "Essential Home Care Pack",
+    blurb: "Wash the clothes. Wash the hands. Clean the toilet. Three daily staples, one smarter price.",
+    price: "₹210",
+    was: "₹227",
+    saveLabel: "You save ₹17",
     theme: "ink",
     includes: [
-      { id: "hand-wash", label: "Charcoal", flavor: "charcoal" },
-      { id: "hand-wash", label: "Lemon", flavor: "lemon" },
-      { id: "hand-wash", label: "Rose", flavor: "rose" },
+      { id: "laundry", label: "1 Ltr Liquid Detergent" },
+      { id: "hand-wash", label: "500 ml Handwash", flavor: "charcoal" },
+      { id: "toilet", label: "500 ml Toilet Cleaner" },
+    ],
+  },
+  {
+    id: "combo-kitchen-bath",
+    badge: "Hot deal",
+    title: "Kitchen & Bathroom Refresh Pack",
+    blurb: "Grease off the plates. Shine on the tiles. Fresh floors underfoot — the weekend reset pack.",
+    price: "₹160",
+    was: "₹213",
+    saveLabel: "You save ₹53",
+    theme: "citrus",
+    includes: [
+      { id: "dish", label: "1 Ltr Dishwash" },
+      { id: "bathroom", label: "500 ml Bathroom Cleaner" },
+      { id: "floor", label: "500 ml Floor Cleaner", flavor: "lemon" },
+    ],
+  },
+  {
+    id: "combo-mega",
+    badge: "1 Ltr trio",
+    title: "Mega Liquid Care Pack",
+    blurb: "A 1 Ltr trio for laundry, dishes and floors — stock the cupboard and skip the refill run.",
+    price: "₹250",
+    was: "₹289",
+    saveLabel: "You save ₹39",
+    theme: "blush",
+    includes: [
+      { id: "laundry", label: "1 Ltr Liquid Detergent" },
+      { id: "dish", label: "1 Ltr Dishwash" },
+      { id: "floor", label: "1 Ltr Floor Cleaner", flavor: "lavender" },
+    ],
+  },
+  {
+    id: "combo-hygiene",
+    badge: "Daily ritual",
+    title: "Daily Hygiene Combo",
+    blurb: "Clothes, floors, bathroom — the quiet daily circuit that keeps the house feeling finished.",
+    price: "₹210",
+    was: "₹217",
+    saveLabel: "You save ₹7",
+    theme: "ink",
+    includes: [
+      { id: "laundry", label: "1 Ltr Liquid Detergent" },
+      { id: "floor", label: "500 ml Floor Cleaner", flavor: "lavender" },
+      { id: "bathroom", label: "500 ml Bathroom Cleaner" },
+    ],
+  },
+  {
+    id: "combo-saver",
+    badge: "Top saver",
+    title: "Kitchen & Washroom Saver Pack",
+    blurb: "From the sink to the washroom — dishwash, handwash and toilet cleaner at a sharp combo price.",
+    price: "₹160",
+    was: "₹223",
+    saveLabel: "You save ₹63",
+    theme: "citrus",
+    includes: [
+      { id: "dish", label: "1 Ltr Dishwash" },
+      { id: "hand-wash", label: "500 ml Handwash", flavor: "lemon" },
+      { id: "toilet", label: "500 ml Toilet Cleaner" },
     ],
   },
 ];

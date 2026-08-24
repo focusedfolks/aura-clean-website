@@ -3367,6 +3367,33 @@ html[data-hero="bathroom"] { --hero-ink: #fff4f6; }
   margin: 1.1rem 0 0;
 }
 
+.offers-price-was {
+  margin: 0;
+  color: rgba(255, 248, 238, 0.55);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.offers-price-now {
+  margin: 0;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  color: rgba(255, 248, 238, 0.72);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.offers-card .offers-price-was,
+.offers-card .offers-price-now {
+  color: inherit;
+  opacity: 0.72;
+}
+
 .offers-price-row strong {
   font-family: "Archivo Black", Impact, sans-serif;
   font-size: clamp(1.6rem, 3vw, 2.1rem);
