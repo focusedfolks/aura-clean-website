@@ -5,6 +5,7 @@ import { ArrowIcon } from "../components/icons";
 import { useCart } from "../context/CartContext";
 import { whatsappHref } from "../data/contact";
 import {
+  FEATURED_OFFER,
   OFFERS,
   offerBottleSrc,
   type OfferDeal,
@@ -80,7 +81,7 @@ function FeaturedDeal({ offer }: { offer: OfferDeal }) {
       <div className="offers-featured-glow" aria-hidden="true" />
       <div className="offers-featured-copy">
         <em className="offers-badge">{offer.badge}</em>
-        <p className="lux-kicker">Whole-house bundle</p>
+        <p className="lux-kicker">Home care pack</p>
         <h2>{offer.title}</h2>
         <p className="offers-lead">{offer.blurb}</p>
         <DealPrice offer={offer} />
@@ -102,8 +103,8 @@ function DealCard({ offer, index }: { offer: OfferDeal; index: number }) {
       className={`offers-card theme-${offer.theme}`}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.45, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.45, delay: Math.min(index, 5) * 0.06, ease: [0.22, 1, 0.36, 1] }}
     >
       <em className="offers-badge">{offer.badge}</em>
       <BottleStack offer={offer} />
@@ -123,8 +124,6 @@ function DealCard({ offer, index }: { offer: OfferDeal; index: number }) {
 }
 
 export function OffersPage() {
-  const [featured, ...rest] = OFFERS;
-
   return (
     <main id="main" className="lux-page offers-page">
       <header className="offers-hero">
@@ -135,20 +134,20 @@ export function OffersPage() {
           more for less.
         </h1>
         <p>
-          Curated packs for the kitchen, the bath, and the whole home — save when you bundle Aura
-          Clean essentials together.
+          Start with the full 6-in-1 home pack, then pick smaller combos for the kitchen, bath, and
+          everyday clean.
         </p>
       </header>
 
-      {featured ? <FeaturedDeal offer={featured} /> : null}
+      <FeaturedDeal offer={FEATURED_OFFER} />
 
       <section className="offers-grid" aria-label="More combo deals">
         <header className="offers-grid-head">
           <p className="lux-kicker">More packs</p>
-          <h2>Pick a combo that fits your routine</h2>
+          <h2>Six household combo offers</h2>
         </header>
         <div className="offers-grid-list">
-          {rest.map((offer, index) => (
+          {OFFERS.map((offer, index) => (
             <DealCard key={offer.id} offer={offer} index={index} />
           ))}
         </div>

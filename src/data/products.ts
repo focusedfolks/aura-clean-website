@@ -11,6 +11,7 @@ export type ProductId =
   | "combo-mega"
   | "combo-hygiene"
   | "combo-saver"
+  | "combo-ultimate"
   | "combo-kitchen"
   | "combo-shine"
   | "combo-trio"
@@ -38,6 +39,7 @@ export type OfferDeal = {
     | "combo-mega"
     | "combo-hygiene"
     | "combo-saver"
+    | "combo-ultimate"
     | "combo-kitchen"
     | "combo-shine"
     | "combo-trio"
@@ -192,24 +194,28 @@ export const PRODUCTS: Product[] = [
   },
 ];
 
+/** Featured 6-in-1 banner — shown at the top of the Offers page. */
+export const FEATURED_OFFER: OfferDeal = {
+  id: "combo",
+  badge: "Exclusive deal",
+  title: "The Ultimate 6-in-1 Home Care Combo",
+  blurb: "6 Essentials. 1 Family. Total Home Hygiene — laundry, floor, dish, bath, toilet and hand wash.",
+  price: "₹349",
+  was: "₹499",
+  saveLabel: "You save ₹150",
+  theme: "featured",
+  includes: [
+    { id: "laundry", label: "Laundry" },
+    { id: "floor", label: "Floor", flavor: "lavender" },
+    { id: "dish", label: "Dish" },
+    { id: "bathroom", label: "Bath" },
+    { id: "toilet", label: "Toilet" },
+    { id: "hand-wash", label: "Hand Wash", flavor: "charcoal" },
+  ],
+};
+
 /** Combo / offer packs — cart only, not listed as regular catalog SKUs. */
 export const OFFERS: OfferDeal[] = [
-  {
-    id: "combo",
-    badge: "Biggest save",
-    title: "Ultimate Whole House Bundle",
-    blurb: "Four 1 Ltr bottles. One checkout. Toilet, bath, dishes and floors — the house, handled.",
-    price: "₹280",
-    was: "₹388",
-    saveLabel: "You save ₹108",
-    theme: "featured",
-    includes: [
-      { id: "toilet", label: "1 Ltr Toilet Cleaner" },
-      { id: "bathroom", label: "1 Ltr Bathroom Cleaner" },
-      { id: "dish", label: "1 Ltr Dishwash" },
-      { id: "floor", label: "1 Ltr Floor Cleaner", flavor: "lavender" },
-    ],
-  },
   {
     id: "combo-essential",
     badge: "Everyday trio",
@@ -285,7 +291,25 @@ export const OFFERS: OfferDeal[] = [
       { id: "toilet", label: "500 ml Toilet Cleaner" },
     ],
   },
+  {
+    id: "combo-ultimate",
+    badge: "Biggest save",
+    title: "Ultimate Whole House Bundle",
+    blurb: "Four 1 Ltr bottles. One checkout. Toilet, bath, dishes and floors — the house, handled.",
+    price: "₹280",
+    was: "₹388",
+    saveLabel: "You save ₹108",
+    theme: "ink",
+    includes: [
+      { id: "toilet", label: "1 Ltr Toilet Cleaner" },
+      { id: "bathroom", label: "1 Ltr Bathroom Cleaner" },
+      { id: "dish", label: "1 Ltr Dishwash" },
+      { id: "floor", label: "1 Ltr Floor Cleaner", flavor: "lavender" },
+    ],
+  },
 ];
+
+export const ALL_OFFERS: OfferDeal[] = [FEATURED_OFFER, ...OFFERS];
 
 function offerToProduct(offer: OfferDeal): Product {
   return {
@@ -304,13 +328,13 @@ function offerToProduct(offer: OfferDeal): Product {
   };
 }
 
-export const COMBO_PRODUCTS: Product[] = OFFERS.map(offerToProduct);
+export const COMBO_PRODUCTS: Product[] = ALL_OFFERS.map(offerToProduct);
 
-/** @deprecated Prefer OFFERS[0] — kept for older imports. */
-export const COMBO_PRODUCT = COMBO_PRODUCTS[0]!;
+/** @deprecated Prefer FEATURED_OFFER — kept for older imports. */
+export const COMBO_PRODUCT = offerToProduct(FEATURED_OFFER);
 
-/** @deprecated Prefer OFFERS[0].includes */
-export const COMBO_INCLUDES = OFFERS[0]!.includes;
+/** @deprecated Prefer FEATURED_OFFER.includes */
+export const COMBO_INCLUDES = FEATURED_OFFER.includes;
 
 export function resolveProductId(id: ProductId): ProductId {
   if (id === "charcoal" || id === "lemon" || id === "rose") return "hand-wash";

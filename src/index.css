@@ -3505,6 +3505,10 @@ html[data-hero="bathroom"] { --hero-ink: #fff4f6; }
   padding: 0.5rem clamp(1.1rem, 4.5vw, 4.5rem) 2.5rem;
 }
 
+.offers-grid-top {
+  padding-top: 0;
+}
+
 .offers-grid-head {
   margin: 0 0 1.35rem;
 }
