@@ -32,28 +32,28 @@ const STORIES = [
     alt: "A family washing hands together with Aura Clean Hand Wash.",
     kicker: "Hand wash",
     punch: "Clean hands. A healthier home.",
-    line: "99.9% germ protection, gentle enough for every age at the sink — the first promise of a better day.",
+    line: "99.9% germ protection, gentle enough for every age at the sink, the first promise of a better day.",
   },
   {
     src: "/why-laundry.webp",
     alt: "Fresh laundry with Aura Clean Laundry Detergent Liquid.",
     kicker: "Laundry",
     punch: "Every load, genuinely fresh.",
-    line: "Deep clean, soft fabric, and a fragrance that lasts past the fold — clothes that feel as clean as they look.",
+    line: "Deep clean, soft fabric, and a fragrance that lasts past the fold, clothes that feel as clean as they look.",
   },
   {
     src: "/why-bathroom.webp",
     alt: "A bright bathroom cleaned with Aura Clean Disinfectant Bathroom Cleaner.",
     kicker: "Bathroom",
     punch: "Shine that actually lasts.",
-    line: "10X cleaner. 99.9% germs gone. A bathroom that looks finished — not just wiped.",
+    line: "10X cleaner. 99.9% germs gone. A bathroom that looks finished, not just wiped.",
   },
   {
     src: "/why-choose-aura.png",
     alt: "Aura Clean Premium Floor Cleaner used while mopping a bright living room.",
     kicker: "Floor",
     punch: "Floors that stay shining.",
-    line: "10X better germ protection for everyday mopping — a clean that looks finished, and feels safe underfoot.",
+    line: "10X better germ protection for everyday mopping, a clean that looks finished, and feels safe underfoot.",
   },
   {
     src: "/why-choose-dish.png",
@@ -73,7 +73,7 @@ const REASONS = [
   {
     n: "02",
     title: "Natural actives",
-    body: "Botanical notes — lemon, rose and charcoal — chosen for clarity, not noise.",
+    body: "Botanical notes, lemon, rose and charcoal, chosen for clarity, not noise.",
   },
   {
     n: "03",
@@ -88,8 +88,8 @@ const REASONS = [
 ] as const;
 
 const PILLARS = [
-  { n: "01", title: "Honest actives", body: "Lemon, rose and charcoal — chosen for clarity, not noise." },
-  { n: "02", title: "Whole-home care", body: "Hands, laundry, floors, dishes and bath — one complete clean." },
+  { n: "01", title: "Honest actives", body: "Lemon, rose and charcoal, chosen for clarity, not noise." },
+  { n: "02", title: "Whole-home care", body: "Hands, laundry, floors, dishes and bath, one complete clean." },
   { n: "03", title: "Quiet design", body: "Packaging that belongs beside a basin, not a laboratory." },
 ] as const;
 
@@ -102,7 +102,7 @@ export function AboutPage() {
         <p className="lux-kicker">About Aura Clean</p>
         <h1>Care that belongs in every home.</h1>
         <p>
-          Aura Clean is a complete hygiene house — six product lines, honest actives, and protection
+          Aura Clean is a complete hygiene house, six product lines, honest actives, and protection
           that feels gentle. From the first lather at the basin to the last wipe on the floor.
         </p>
       </header>
@@ -137,7 +137,7 @@ export function AboutPage() {
           </p>
           <p>
             Hand wash is the signature. The range carries the same promise through laundry,
-            bathroom, floors, dishes and toilet care — no clutter, no theatre, just work done with
+            bathroom, floors, dishes and toilet care, no clutter, no theatre, just work done with
             restraint.
           </p>
         </div>
@@ -213,7 +213,7 @@ export function AboutPage() {
       <section className="lux-split">
         <img
           src="/family-hands.webp"
-          alt="Hands held together — the Aura Clean ritual at home."
+          alt="Hands held together, the Aura Clean ritual at home."
           width={1200}
           height={800}
         />
@@ -222,7 +222,7 @@ export function AboutPage() {
           <h2>Because every touch matters.</h2>
           <p>
             From the first lather to the last rinse, Aura Clean is designed for the rhythm of family
-            life — thorough enough to protect, gentle enough to repeat.
+            life, thorough enough to protect, gentle enough to repeat.
           </p>
           <ol className="lux-pillars">
             {PILLARS.map((item) => (
@@ -240,7 +240,7 @@ export function AboutPage() {
 
       <section className="lux-close">
         <h2>Bring Aura Clean home.</h2>
-        <p>Six product lines. One complete clean — from hands to floors.</p>
+        <p>Six product lines. One complete clean, from hands to floors.</p>
         <Link className="cta cta-lime" to="/product">
           Explore the collection
           <span className="cta-arrow" aria-hidden="true">

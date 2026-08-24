@@ -92,9 +92,9 @@ export const PRODUCTS: Product[] = [
     category: "hand-wash",
     src: "/product-handwash-charcoal.webp?v=11",
     tone: "#222",
-    blurb: "Deep cleanse and lasting protection — pick your favourite fragrance.",
+    blurb: "Deep cleanse and lasting protection, pick your favourite fragrance.",
     spec: "99.9% Cleaning Protection",
-    volume: "250 ml – 5 Ltr",
+    volume: "250 ml - 5 Ltr",
     flavors: [
       {
         id: "charcoal",
@@ -125,7 +125,7 @@ export const PRODUCTS: Product[] = [
     tone: "#1c4fa0",
     blurb: "10x Power. Removes tough stains. Fresh fragrance. Deep cleaning.",
     spec: "Kills 99.9% Germs",
-    volume: "500 ml – 1 Ltr",
+    volume: "500 ml - 1 Ltr",
     sizes: ["500 ml", "1 Ltr"],
   },
   {
@@ -136,7 +136,7 @@ export const PRODUCTS: Product[] = [
     tone: "#6e1010",
     blurb: "10X better cleaning for sinks, tiles and fittings.",
     spec: "Kills 99.9% Germs",
-    volume: "500 ml – 1 Ltr",
+    volume: "500 ml - 1 Ltr",
     sizes: ["500 ml", "1 Ltr"],
   },
   {
@@ -147,7 +147,7 @@ export const PRODUCTS: Product[] = [
     tone: "#3d7ad6",
     blurb: "Deep clean. Fresh fragrance. Gentle on fabric.",
     spec: "1 Ltr · 5 Ltr",
-    volume: "1 Ltr – 5 Ltr",
+    volume: "1 Ltr - 5 Ltr",
     sizes: ["1 Ltr", "5 Ltr"],
   },
   {
@@ -156,9 +156,9 @@ export const PRODUCTS: Product[] = [
     category: "floor",
     src: "/product-floor-lavender.webp?v=1",
     tone: "#7b4fd1",
-    blurb: "Plant-extract powered shine — pick Lavender, Lemon Fresh, or Rose Fresh.",
+    blurb: "Plant-extract powered shine, pick Lavender, Lemon Fresh, or Rose Fresh.",
     spec: "10X Litter & Bacteria Stronger Clean",
-    volume: "500 ml – 1 Ltr",
+    volume: "500 ml - 1 Ltr",
     flavors: [
       {
         id: "lavender",
@@ -194,12 +194,12 @@ export const PRODUCTS: Product[] = [
   },
 ];
 
-/** Featured 6-in-1 banner — shown at the top of the Offers page. */
+/** Featured 6-in-1 banner, shown at the top of the Offers page. */
 export const FEATURED_OFFER: OfferDeal = {
   id: "combo",
   badge: "Exclusive deal",
   title: "The Ultimate 6-in-1 Home Care Combo",
-  blurb: "6 Essentials. 1 Family. Total Home Hygiene — laundry, floor, dish, bath, toilet and hand wash.",
+  blurb: "6 Essentials. 1 Family. Total Home Hygiene, laundry, floor, dish, bath, toilet and hand wash.",
   price: "₹349",
   was: "₹499",
   saveLabel: "You save ₹150",
@@ -214,7 +214,7 @@ export const FEATURED_OFFER: OfferDeal = {
   ],
 };
 
-/** Combo / offer packs — cart only, not listed as regular catalog SKUs. */
+/** Combo / offer packs, cart only, not listed as regular catalog SKUs. */
 export const OFFERS: OfferDeal[] = [
   {
     id: "combo-essential",
@@ -235,7 +235,7 @@ export const OFFERS: OfferDeal[] = [
     id: "combo-kitchen-bath",
     badge: "Hot deal",
     title: "Kitchen & Bathroom Refresh Pack",
-    blurb: "Grease off the plates. Shine on the tiles. Fresh floors underfoot — the weekend reset pack.",
+    blurb: "Grease off the plates. Shine on the tiles. Fresh floors underfoot, the weekend reset pack.",
     price: "₹160",
     was: "₹213",
     saveLabel: "You save ₹53",
@@ -250,7 +250,7 @@ export const OFFERS: OfferDeal[] = [
     id: "combo-mega",
     badge: "1 Ltr trio",
     title: "Mega Liquid Care Pack",
-    blurb: "A 1 Ltr trio for laundry, dishes and floors — stock the cupboard and skip the refill run.",
+    blurb: "A 1 Ltr trio for laundry, dishes and floors, stock the cupboard and skip the refill run.",
     price: "₹250",
     was: "₹289",
     saveLabel: "You save ₹39",
@@ -265,7 +265,7 @@ export const OFFERS: OfferDeal[] = [
     id: "combo-hygiene",
     badge: "Daily ritual",
     title: "Daily Hygiene Combo",
-    blurb: "Clothes, floors, bathroom — the quiet daily circuit that keeps the house feeling finished.",
+    blurb: "Clothes, floors, bathroom, the quiet daily circuit that keeps the house feeling finished.",
     price: "₹210",
     was: "₹217",
     saveLabel: "You save ₹7",
@@ -280,7 +280,7 @@ export const OFFERS: OfferDeal[] = [
     id: "combo-saver",
     badge: "Top saver",
     title: "Kitchen & Washroom Saver Pack",
-    blurb: "From the sink to the washroom — dishwash, handwash and toilet cleaner at a sharp combo price.",
+    blurb: "From the sink to the washroom, dishwash, handwash and toilet cleaner at a sharp combo price.",
     price: "₹160",
     was: "₹223",
     saveLabel: "You save ₹63",
@@ -295,7 +295,7 @@ export const OFFERS: OfferDeal[] = [
     id: "combo-ultimate",
     badge: "Biggest save",
     title: "Ultimate Whole House Bundle",
-    blurb: "Four 1 Ltr bottles. One checkout. Toilet, bath, dishes and floors — the house, handled.",
+    blurb: "Four 1 Ltr bottles. One checkout. Toilet, bath, dishes and floors, the house, handled.",
     price: "₹280",
     was: "₹388",
     saveLabel: "You save ₹108",
@@ -330,7 +330,7 @@ function offerToProduct(offer: OfferDeal): Product {
 
 export const COMBO_PRODUCTS: Product[] = ALL_OFFERS.map(offerToProduct);
 
-/** @deprecated Prefer FEATURED_OFFER — kept for older imports. */
+/** @deprecated Prefer FEATURED_OFFER, kept for older imports. */
 export const COMBO_PRODUCT = offerToProduct(FEATURED_OFFER);
 
 /** @deprecated Prefer FEATURED_OFFER.includes */

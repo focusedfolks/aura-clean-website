@@ -143,7 +143,7 @@ const VARIANTS = [
     id: "floor",
     src: "/product-floor-lavender.webp?v=1",
     name: "Floor",
-    line: "Premium Floor Cleaner — Lavender",
+    line: "Premium Floor Cleaner, Lavender",
     word: "SHINE",
     slogan: "Floors That Glow.",
     description: "Plant-extract powered clean for lasting shine, freshness, and 10X stronger litter & bacteria clean.",

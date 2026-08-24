@@ -51,7 +51,7 @@ export function HomeRest() {
         <header className="band-head lux-head">
           <p className="lux-kicker">The collection</p>
           <h2>Our complete cleaning range</h2>
-          <p>Six product lines. Flavours and sizes you can pick — from the basin to the floor.</p>
+          <p>Six product lines. Flavours and sizes you can pick, from the basin to the floor.</p>
         </header>
         <ul className="range-grid">
           {COLLECTION.map((item) => (
@@ -177,7 +177,7 @@ export function HomeRest() {
             <span className="final-line">Healthy life.</span>
             <span className="final-line is-accent">Better home.</span>
           </h2>
-          <p className="final-cta-note">Care that protects — from the basin to the floor.</p>
+          <p className="final-cta-note">Care that protects, from the basin to the floor.</p>
           <Link className="cta cta-lime" to="/product">
             Explore the collection
             <span className="cta-arrow" aria-hidden="true">
