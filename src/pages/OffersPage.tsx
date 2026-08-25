@@ -18,7 +18,7 @@ function DealCta({ offer }: { offer: OfferDeal }) {
   return (
     <button
       type="button"
-      className="offers-cta"
+      className={`offers-cta${offer.gift ? " has-gift" : ""}`}
       onClick={() => {
         add(offer.id);
         setBusy(true);
@@ -106,11 +106,19 @@ function DealCard({ offer, index }: { offer: OfferDeal; index: number }) {
       viewport={{ once: true, amount: 0.25 }}
       transition={{ duration: 0.45, delay: Math.min(index, 5) * 0.06, ease: [0.22, 1, 0.36, 1] }}
     >
-      <em className="offers-badge">{offer.badge}</em>
+      <em className={`offers-badge${offer.gift ? " is-gift" : ""}`}>{offer.badge}</em>
       <BottleStack offer={offer} />
       <div className="offers-card-copy">
         <h3>{offer.title}</h3>
         <p>{offer.blurb}</p>
+        {offer.gift ? (
+          <p className="offers-gift" aria-label="Free gift included">
+            <span className="offers-gift-icon" aria-hidden="true">
+              🎁
+            </span>
+            {offer.gift}
+          </p>
+        ) : null}
         <DealPrice offer={offer} />
         <ul className="offers-chips" aria-label="Included products">
           {offer.includes.map((item, i) => (
@@ -144,7 +152,7 @@ export function OffersPage() {
       <section className="offers-grid" aria-label="More combo deals">
         <header className="offers-grid-head">
           <p className="lux-kicker">More packs</p>
-          <h2>Six household combo offers</h2>
+          <h2>Seven household combo offers</h2>
         </header>
         <div className="offers-grid-list">
           {OFFERS.map((offer, index) => (
