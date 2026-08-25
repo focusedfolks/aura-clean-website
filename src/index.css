@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Playfair Display", ui-serif, Georgia, serif;
@@ -11,6 +13,16 @@
   --color-sky: #0b4c78;
   --color-ink: #16315a;
   --color-muted: #5d738c;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted-surface);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
 }
 
 :root {
@@ -28,6 +40,41 @@
   background: #fff8ee;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  --amber: oklch(0.77 0.16 75);
+  --amber-fg: oklch(0.22 0 0);
+  --amber-hover: oklch(0.71 0.17 70);
+  --blue: oklch(0.62 0.19 256);
+  --blue-fg: #fff;
+  --blue-hover: oklch(0.56 0.2 256);
+  --green: oklch(0.7 0.17 152);
+  --green-fg: #fff;
+  --green-hover: oklch(0.64 0.18 152);
+  --smooth-50: oklch(0.99 0 0);
+  --smooth-100: oklch(0.972 0 0);
+  --smooth-200: oklch(0.945 0 0);
+  --smooth-300: oklch(0.91 0 0);
+  --smooth-400: oklch(0.865 0 0);
+  --smooth-500: oklch(0.81 0 0);
+  --smooth-600: oklch(0.74 0 0);
+  --smooth-700: oklch(0.66 0 0);
+  --smooth-800: oklch(0.56 0 0);
+  --smooth-900: oklch(0.47 0 0);
+  --smooth-950: oklch(0.36 0 0);
+  --smooth-1000: oklch(0.22 0 0);
+  --background: #fff8ee;
+  --foreground: #1c1408;
+  --card: #ffffff;
+  --card-foreground: #1c1408;
+  --primary: #1c1408;
+  --primary-foreground: #fff8ee;
+  --muted-surface: #f3eadc;
+  --muted-foreground: #6b6256;
+  --border: rgba(28, 20, 8, 0.1);
+  --ring: #f5c400;
+  --brand: #f5c400;
+  --brand-secondary: #e0b000;
+  --brand-light: #f8d44a;
+  --brand-lighter: #fbe88a;
 }
 
 * { box-sizing: border-box; }
@@ -3367,6 +3414,39 @@ html[data-hero="bathroom"] { --hero-ink: #fff4f6; }
     0 8px 20px rgba(16, 185, 129, 0.35);
 }
 
+.offers-badge.is-soon {
+  background: #f59e0b;
+  color: #1c1408;
+  border: 0;
+  box-shadow:
+    0 0 0 2px rgba(245, 158, 11, 0.35),
+    0 8px 20px rgba(245, 158, 11, 0.28);
+}
+
+.offers-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 0.75rem;
+}
+
+.offers-card-badges .offers-badge {
+  margin: 0;
+}
+
+.offers-card.is-coming-soon {
+  opacity: 0.92;
+}
+
+.offers-cta.is-soon {
+  background: rgba(245, 158, 11, 0.18);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  box-shadow: none;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .offers-price-row {
   display: flex;
   flex-wrap: wrap;
@@ -3452,11 +3532,11 @@ html[data-hero="bathroom"] { --hero-ink: #fff4f6; }
 
 .offers-card.theme-citrus .offers-gift,
 .offers-card.theme-blush .offers-gift {
-  background: #f59e0b;
-  color: #000;
+  background: #10b981;
+  color: #fff;
   box-shadow:
-    0 0 0 2px rgba(245, 158, 11, 0.35),
-    0 10px 24px rgba(245, 158, 11, 0.28);
+    0 0 0 2px rgba(16, 185, 129, 0.28),
+    0 10px 24px rgba(16, 185, 129, 0.32);
 }
 
 .offers-card.theme-ink .offers-gift {
@@ -3602,6 +3682,34 @@ html[data-hero="bathroom"] { --hero-ink: #fff4f6; }
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.1rem;
+}
+
+.offers-product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.offers-smooth-card .offers-bottles {
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.offers-smooth-card .offers-bottles img {
+  height: clamp(108px, 16vw, 150px);
+  margin: 0 -0.5rem;
+}
+
+.offers-smooth-card:hover .offers-bottles img {
+  transform: translateY(-6px);
+}
+
+@media (min-width: 1100px) {
+  .offers-product-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 .offers-card {
@@ -3763,6 +3871,10 @@ html[data-hero="bathroom"] { --hero-ink: #fff4f6; }
   }
 
   .offers-grid-list {
+    grid-template-columns: 1fr;
+  }
+
+  .offers-product-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -4529,4 +4641,387 @@ html[data-hero="bathroom"] { --hero-ink: #fff4f6; }
   }
 
   .cta { transition: none; }
+}
+
+@theme inline {
+  --color-brand: var(--brand, #f5c400);
+  --color-brand-light: var(--brand-light, #f8d44a);
+  --color-brand-lighter: var(--brand-lighter, #fbe88a);
+  --color-brand-secondary: var(--brand-secondary, #e0b000);
+  --color-amber: var(--amber);
+  --color-amber-fg: var(--amber-fg);
+  --color-amber-hover: var(--amber-hover);
+  --color-blue: var(--blue);
+  --color-blue-fg: var(--blue-fg);
+  --color-blue-hover: var(--blue-hover);
+  --color-green: var(--green);
+  --color-green-fg: var(--green-fg);
+  --color-green-hover: var(--green-hover);
+  --color-smooth-50: var(--smooth-50);
+  --color-smooth-100: var(--smooth-100);
+  --color-smooth-200: var(--smooth-200);
+  --color-smooth-300: var(--smooth-300);
+  --color-smooth-400: var(--smooth-400);
+  --color-smooth-500: var(--smooth-500);
+  --color-smooth-600: var(--smooth-600);
+  --color-smooth-700: var(--smooth-700);
+  --color-smooth-800: var(--smooth-800);
+  --color-smooth-900: var(--smooth-900);
+  --color-smooth-950: var(--smooth-950);
+  --color-smooth-1000: var(--smooth-1000);
+}
+
+.dark {
+  --amber: oklch(0.8 0.15 75);
+  --amber-fg: oklch(0.2 0 0);
+  --amber-hover: oklch(0.85 0.14 72);
+  --blue: oklch(0.66 0.18 256);
+  --blue-fg: #fff;
+  --blue-hover: oklch(0.72 0.16 256);
+  --green: oklch(0.73 0.16 152);
+  --green-fg: oklch(0.2 0 0);
+  --green-hover: oklch(0.79 0.15 152);
+  --smooth-50: oklch(0.2 0 0);
+  --smooth-100: oklch(0.235 0 0);
+  --smooth-200: oklch(0.275 0 0);
+  --smooth-300: oklch(0.315 0 0);
+  --smooth-400: oklch(0.36 0 0);
+  --smooth-500: oklch(0.41 0 0);
+  --smooth-600: oklch(0.47 0 0);
+  --smooth-700: oklch(0.55 0 0);
+  --smooth-800: oklch(0.66 0 0);
+  --smooth-900: oklch(0.74 0 0);
+  --smooth-950: oklch(0.85 0 0);
+  --smooth-1000: oklch(0.96 0 0);
+}
+
+/* ------------------------------------------------------------------ */
+/* PWA install prompt                                                  */
+/* ------------------------------------------------------------------ */
+
+.install-prompt {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: end center;
+  padding: 0 0.85rem max(0.85rem, env(safe-area-inset-bottom));
+  pointer-events: none;
+}
+
+.install-prompt-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(28, 20, 8, 0.45);
+  pointer-events: auto;
+}
+
+.install-prompt-card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 420px);
+  margin-bottom: 5.4rem;
+  padding: 1.15rem 1.15rem 1.25rem;
+  border-radius: 22px;
+  background: #fff8ee;
+  color: #1c1408;
+  box-shadow: 0 24px 60px rgba(28, 20, 8, 0.28);
+  pointer-events: auto;
+  animation: install-up 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes install-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.install-prompt-close {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.65rem;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(28, 20, 8, 0.06);
+  color: #1c1408;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.install-prompt-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding-right: 1.5rem;
+}
+
+.install-prompt-brand img {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 14px;
+  object-fit: contain;
+  background: #fff;
+  box-shadow: 0 8px 18px rgba(28, 20, 8, 0.1);
+}
+
+.install-prompt-kicker {
+  margin: 0;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(28, 20, 8, 0.55);
+}
+
+.install-prompt-card h2 {
+  margin: 0.2rem 0 0;
+  font-family: "Archivo Black", Impact, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.install-prompt-copy {
+  margin: 0.85rem 0 0;
+  color: rgba(28, 20, 8, 0.72);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.install-prompt-steps {
+  margin: 0.75rem 0 0;
+  padding-left: 1.15rem;
+  color: rgba(28, 20, 8, 0.78);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.install-prompt-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 1.1rem;
+}
+
+.install-prompt-cta,
+.install-prompt-later {
+  min-height: 46px;
+  padding: 0.55rem 1.15rem;
+  border: 0;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.install-prompt-cta {
+  flex: 1 1 auto;
+  background: var(--lime);
+  color: #1c1408;
+  box-shadow: 0 12px 24px rgba(245, 196, 0, 0.28);
+}
+
+.install-prompt-later {
+  background: rgba(28, 20, 8, 0.06);
+  color: #1c1408;
+}
+
+@media (min-width: 768px) {
+  .install-prompt {
+    place-items: center;
+    padding: 1rem;
+  }
+
+  .install-prompt-card {
+    margin-bottom: 0;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Offer poster popup                                                  */
+/* ------------------------------------------------------------------ */
+
+.offer-poster {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  display: grid;
+  place-items: center;
+  padding: max(0.7rem, env(safe-area-inset-top)) 0.7rem max(0.7rem, env(safe-area-inset-bottom));
+}
+
+.offer-poster-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 18, 28, 0.72);
+}
+
+.offer-poster-card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 420px);
+  max-height: min(94dvh, 920px);
+  overflow: auto;
+  padding: 0.7rem 0.7rem 0.9rem;
+  border-radius: 18px;
+  background: #fff8ee;
+  box-shadow: 0 28px 70px rgba(8, 16, 28, 0.4);
+}
+
+.offer-poster-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+}
+
+.offer-poster-close {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.45rem;
+  z-index: 2;
+  width: 2.2rem;
+  height: 2.2rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(28, 20, 8, 0.82);
+  color: #fff8ee;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.offer-poster-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.offer-poster-cta,
+.offer-poster-later {
+  min-height: 46px;
+  padding: 0.5rem 1.1rem;
+  border: 0;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.offer-poster-cta {
+  flex: 1 1 auto;
+  background: var(--lime);
+  color: #1c1408;
+}
+
+.offer-poster-later {
+  background: rgba(28, 20, 8, 0.08);
+  color: #1c1408;
+}
+
+.offers-poster-teaser {
+  display: block;
+  width: min(100%, 520px);
+  margin: 0 auto 1.5rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: center;
+}
+
+.offers-poster-teaser img {
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(28, 20, 8, 0.14);
+}
+
+.offers-poster-teaser span {
+  display: inline-block;
+  margin-top: 0.55rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(28, 20, 8, 0.55);
+}
+
+/* ------------------------------------------------------------------ */
+/* Mobile / Android polish                                             */
+/* ------------------------------------------------------------------ */
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 767px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+
+  .lux-page,
+  .offers-page,
+  main {
+    padding-bottom: calc(5.8rem + env(safe-area-inset-bottom));
+  }
+
+  .offers-product-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .offers-smooth-card .offers-bottles img {
+    height: clamp(96px, 28vw, 128px);
+  }
+
+  .offers-hero h1,
+  .offers-grid-head h2 {
+    max-width: none;
+  }
+
+  .offers-cta,
+  .cta,
+  .install-prompt-cta,
+  .install-prompt-later {
+    min-height: 48px;
+  }
+
+  .final-cta,
+  .site-footer {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .install-prompt-card {
+    animation: none;
+  }
 }

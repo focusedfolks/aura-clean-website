@@ -16,6 +16,10 @@ export type ProductId =
   | "combo-kitchen"
   | "combo-shine"
   | "combo-trio"
+  | "combo-fresh-surface"
+  | "combo-daily-essentials"
+  | "combo-kitchen-refresh"
+  | "combo-washroom-starter"
   /** Legacy cart / deep-link ids */
   | "charcoal"
   | "lemon"
@@ -45,14 +49,19 @@ export type OfferDeal = {
     | "combo-kitchen"
     | "combo-shine"
     | "combo-trio"
+    | "combo-fresh-surface"
+    | "combo-daily-essentials"
+    | "combo-kitchen-refresh"
+    | "combo-washroom-starter"
   >;
   badge: string;
   title: string;
   blurb: string;
   price: string;
   was?: string;
-  saveLabel: string;
+  saveLabel?: string;
   gift?: string;
+  comingSoon?: boolean;
   theme: OfferTheme;
   includes: OfferInclude[];
 };
@@ -200,12 +209,11 @@ export const PRODUCTS: Product[] = [
 /** Featured 6-in-1 banner, shown at the top of the Offers page. */
 export const FEATURED_OFFER: OfferDeal = {
   id: "combo",
-  badge: "Exclusive deal",
-  title: "The Ultimate 6-in-1 Home Care Combo",
-  blurb: "6 Essentials. 1 Family. Total Home Hygiene, laundry, floor, dish, bath, toilet and hand wash.",
+  badge: "Best value",
+  title: "6-in-1 Ultimate Cleaning Bundle",
+  blurb:
+    "Six essentials, one family pack. Laundry, dishes, floors, bath, toilet and hand wash, everything your home needs in a single smart bundle.",
   price: "₹349",
-  was: "₹499",
-  saveLabel: "You save ₹150",
   theme: "featured",
   includes: [
     { id: "laundry", label: "1 Ltr Laundry" },
@@ -220,111 +228,65 @@ export const FEATURED_OFFER: OfferDeal = {
 /** Combo / offer packs, cart only, not listed as regular catalog SKUs. */
 export const OFFERS: OfferDeal[] = [
   {
-    id: "combo-kitchen-bath",
-    badge: "Hot deal",
-    title: "Kitchen & Floor Care Pack",
-    blurb: "Grease off the plates. Shine on the tiles. Fresh floors underfoot. The weekend reset, for less.",
-    price: "₹160",
-    was: "₹213",
-    saveLabel: "You save ₹53",
-    theme: "citrus",
-    includes: [
-      { id: "dish", label: "1 Ltr Dishwash" },
-      { id: "bathroom", label: "500 ml Bathroom Cleaner" },
-      { id: "floor", label: "500 ml Floor Cleaner", flavor: "lemon" },
-    ],
-  },
-  {
-    id: "combo-saver",
-    badge: "Top saver",
-    title: "Kitchen & Washroom Saver Pack",
-    blurb: "From the sink to the washroom. Dishwash, handwash and toilet cleaner at a sharp combo price.",
-    price: "₹160",
-    was: "₹223",
-    saveLabel: "You save ₹63",
+    id: "combo-kitchen-refresh",
+    badge: "Kitchen pick",
+    title: "Kitchen & Floor Maintenance Combo",
+    blurb:
+      "Grease-free dishes, fresh hands, shining floors. The everyday kitchen-to-hallway reset, all in one pack.",
+    price: "₹200",
+    comingSoon: true,
     theme: "citrus",
     includes: [
       { id: "dish", label: "1 Ltr Dishwash" },
       { id: "hand-wash", label: "500 ml Handwash", flavor: "lemon" },
-      { id: "toilet", label: "500 ml Toilet Cleaner" },
+      { id: "floor", label: "500 ml Floor Cleaner", flavor: "lemon" },
     ],
   },
   {
-    id: "combo-essential",
-    badge: "Everyday trio",
-    title: "Essential Home Care Pack",
-    blurb: "Clothes, hands, toilet. Three daily staples every home reaches for first, now in one smarter pack.",
-    price: "₹210",
-    was: "₹227",
-    saveLabel: "You save ₹17",
+    id: "combo-washroom-starter",
+    badge: "Everyday value",
+    title: "Essential Washroom & Laundry Combo",
+    blurb:
+      "Fresh laundry, a clean toilet, and a sparkling bath. The washroom staples every home needs, priced to move.",
+    price: "₹200",
+    comingSoon: true,
     theme: "ink",
     includes: [
       { id: "laundry", label: "1 Ltr Liquid Detergent" },
-      { id: "hand-wash", label: "500 ml Handwash", flavor: "charcoal" },
       { id: "toilet", label: "500 ml Toilet Cleaner" },
-    ],
-  },
-  {
-    id: "combo-hygiene",
-    badge: "Daily ritual",
-    title: "Daily Wash & Clean Combo",
-    blurb: "Wash the load. Mop the floor. Wipe the bath. A quiet daily circuit that keeps the house finished.",
-    price: "₹210",
-    was: "₹217",
-    saveLabel: "You save ₹7",
-    theme: "ink",
-    includes: [
-      { id: "laundry", label: "1 Ltr Liquid Detergent" },
-      { id: "floor", label: "500 ml Floor Cleaner", flavor: "lavender" },
       { id: "bathroom", label: "500 ml Bathroom Cleaner" },
     ],
   },
   {
-    id: "combo-mega",
-    badge: "Free gift",
-    title: "Mega 1L Trio Pack",
-    blurb: "Three full litres for laundry, dishes and floors. Plus a FREE Handwash 250 ml in the box.",
-    price: "₹250",
-    was: "₹289",
-    saveLabel: "You save ₹39",
-    gift: "FREE 250ML HANDWASH with this Combo",
+    id: "combo-daily-essentials",
+    badge: "🎁 FREE 250ML HANDWASH",
+    title: "Daily Cleaning & Wash Trio Pack",
+    blurb:
+      "Laundry, toilet and dishes in full 1L bottles. Three chores you never skip, plus a free handwash gift.",
+    price: "₹240",
+    gift: "FREE 250ML HANDWASH",
+    comingSoon: true,
     theme: "blush",
     includes: [
       { id: "laundry", label: "1 Ltr Liquid Detergent" },
+      { id: "toilet", label: "1 Ltr Toilet Cleaner" },
       { id: "dish", label: "1 Ltr Dishwash" },
-      { id: "floor", label: "1 Ltr Floor Cleaner", flavor: "lavender" },
     ],
   },
   {
-    id: "combo-power",
-    badge: "Free gift",
-    title: "Complete Cleaning Power Combo",
-    blurb: "Laundry, dishes and toilet in 1 Ltr bottles. Plus a FREE Handwash 250 ml with this combo.",
-    price: "₹260",
-    was: "₹293",
-    saveLabel: "You save ₹33",
-    gift: "FREE 250ML HANDWASH with this Combo",
+    id: "combo-fresh-surface",
+    badge: "🎁 FREE 250ML HANDWASH",
+    title: "Complete Home Surface Care Pack",
+    blurb:
+      "Toilet, bathroom and floors in three full litres. Surface-deep clean for every room, with a free handwash bonus.",
+    price: "₹270",
+    gift: "FREE 250ML HANDWASH",
+    comingSoon: true,
     theme: "citrus",
     includes: [
-      { id: "laundry", label: "1 Ltr Liquid Detergent" },
-      { id: "dish", label: "1 Ltr Dishwash" },
-      { id: "toilet", label: "1 Ltr Toilet Cleaner" },
-    ],
-  },
-  {
-    id: "combo-ultimate",
-    badge: "Free gift",
-    title: "Whole House Heavy Duty 1L Pack",
-    blurb: "Three 1 Ltr bottles for laundry, toilet and bathroom. Plus a FREE Handwash 250 ml with every order.",
-    price: "₹280",
-    was: "₹297",
-    saveLabel: "You save ₹17",
-    gift: "FREE 250ML HANDWASH with this Combo",
-    theme: "ink",
-    includes: [
-      { id: "laundry", label: "1 Ltr Liquid Detergent" },
       { id: "toilet", label: "1 Ltr Toilet Cleaner" },
       { id: "bathroom", label: "1 Ltr Bathroom Cleaner" },
+      { id: "floor", label: "1 Ltr Floor Cleaner", flavor: "lavender" },
     ],
   },
 ];

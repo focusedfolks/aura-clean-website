@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import ProductCard from "@/components/smoothui/product-card";
+import { OfferPosterDialog, OFFER_POSTER_SRC } from "../components/OfferPosterPopup";
 import { ArrowIcon } from "../components/icons";
 import { useCart } from "../context/CartContext";
 import { whatsappHref } from "../data/contact";
@@ -11,9 +13,22 @@ import {
   type OfferDeal,
 } from "../data/products";
 
+function parseOfferPrice(price: string): number {
+  const value = Number(price.replace(/[^\d.]/g, ""));
+  return Number.isFinite(value) ? value : 0;
+}
+
 function DealCta({ offer }: { offer: OfferDeal }) {
   const { add } = useCart();
   const [busy, setBusy] = useState(false);
+
+  if (offer.comingSoon) {
+    return (
+      <button type="button" className="offers-cta is-soon" disabled>
+        Coming Soon
+      </button>
+    );
+  }
 
   return (
     <button
@@ -28,7 +43,7 @@ function DealCta({ offer }: { offer: OfferDeal }) {
         window.open(whatsappHref(message), "_blank", "noopener,noreferrer");
       }}
     >
-      {busy ? "Opening WhatsApp…" : "Grab this deal"}
+      {busy ? "Opening WhatsApp…" : "Buy Now"}
       <span aria-hidden="true">
         <ArrowIcon />
       </span>
@@ -39,15 +54,9 @@ function DealCta({ offer }: { offer: OfferDeal }) {
 function DealPrice({ offer }: { offer: OfferDeal }) {
   return (
     <div className="offers-price-row">
-      {offer.was ? (
-        <p className="offers-price-was">
-          Regular <s>{offer.was}</s>
-        </p>
-      ) : null}
       <p className="offers-price-now">
-        Combo <strong>{offer.price}</strong>
+        Special Combo Price <strong>{offer.price}</strong>
       </p>
-      <span>{offer.saveLabel}</span>
     </div>
   );
 }
@@ -97,43 +106,42 @@ function FeaturedDeal({ offer }: { offer: OfferDeal }) {
   );
 }
 
-function DealCard({ offer, index }: { offer: OfferDeal; index: number }) {
+function OfferProductCard({ offer }: { offer: OfferDeal }) {
+  const { add } = useCart();
+  const badge = offer.gift ? "🎁 FREE 250ML HANDWASH" : offer.comingSoon ? "Coming Soon" : offer.badge;
+  const secondaryBadge =
+    offer.gift && offer.comingSoon ? "Coming Soon" : undefined;
+
   return (
-    <motion.article
-      className={`offers-card theme-${offer.theme}`}
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 0.45, delay: Math.min(index, 5) * 0.06, ease: [0.22, 1, 0.36, 1] }}
-    >
-      <em className={`offers-badge${offer.gift ? " is-gift" : ""}`}>{offer.badge}</em>
-      <BottleStack offer={offer} />
-      <div className="offers-card-copy">
-        <h3>{offer.title}</h3>
-        <p>{offer.blurb}</p>
-        {offer.gift ? (
-          <p className="offers-gift" aria-label="Free gift included">
-            <span className="offers-gift-icon" aria-hidden="true">
-              🎁
-            </span>
-            {offer.gift}
-          </p>
-        ) : null}
-        <DealPrice offer={offer} />
-        <ul className="offers-chips" aria-label="Included products">
-          {offer.includes.map((item, i) => (
-            <li key={`${item.id}-${item.label}-${i}`}>{item.label}</li>
-          ))}
-        </ul>
-        <DealCta offer={offer} />
-      </div>
-    </motion.article>
+    <ProductCard
+      badge={badge}
+      className="offers-smooth-card"
+      comingSoon={offer.comingSoon}
+      ctaLabel="Buy Now"
+      currency="₹"
+      description={offer.blurb}
+      hideWishlist
+      includes={offer.includes.map((item) => item.label)}
+      media={<BottleStack offer={offer} />}
+      price={parseOfferPrice(offer.price)}
+      secondaryBadge={secondaryBadge}
+      title={offer.title}
+      onAddToCart={() => {
+        add(offer.id);
+        const message =
+          `Hi Aura Clean,\nI want to order:\n• ${offer.title} (${offer.price})\n\nPlease share availability and delivery details.`;
+        window.open(whatsappHref(message), "_blank", "noopener,noreferrer");
+      }}
+    />
   );
 }
 
 export function OffersPage() {
+  const [posterOpen, setPosterOpen] = useState(false);
+
   return (
     <main id="main" className="lux-page offers-page">
+      <OfferPosterDialog open={posterOpen} onClose={() => setPosterOpen(false)} />
       <header className="offers-hero">
         <p className="lux-kicker">Offers & combos</p>
         <h1>
@@ -142,21 +150,36 @@ export function OffersPage() {
           more for less.
         </h1>
         <p>
-          Start with the full 6-in-1 home pack, then pick smaller combos for the kitchen, bath, and
-          everyday clean.
+          Start with the full 6-in-1 home pack, then choose from four focused combos for kitchen,
+          washroom, and everyday cleaning.
         </p>
       </header>
+
+      <button
+        type="button"
+        className="offers-poster-teaser"
+        onClick={() => setPosterOpen(true)}
+        aria-label="Open Rabi Ul Awwal offer poster"
+      >
+        <img
+          src={OFFER_POSTER_SRC}
+          alt="Rabi Ul Awwal Offer poster, 6-in-1 combo pack for ₹349"
+          width={720}
+          height={1024}
+        />
+        <span>Tap to view full poster</span>
+      </button>
 
       <FeaturedDeal offer={FEATURED_OFFER} />
 
       <section className="offers-grid" aria-label="More combo deals">
         <header className="offers-grid-head">
           <p className="lux-kicker">More packs</p>
-          <h2>Seven household combo offers</h2>
+          <h2>Four focused combo packs</h2>
         </header>
-        <div className="offers-grid-list">
-          {OFFERS.map((offer, index) => (
-            <DealCard key={offer.id} offer={offer} index={index} />
+        <div className="offers-product-grid">
+          {OFFERS.map((offer) => (
+            <OfferProductCard key={offer.id} offer={offer} />
           ))}
         </div>
       </section>
