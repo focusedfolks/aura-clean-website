@@ -1,12 +1,10 @@
 import { useState } from "react";
 import ProductCard from "@/components/smoothui/product-card";
 import { useCart } from "../context/CartContext";
-import { whatsappHref } from "../data/contact";
 import {
   defaultFlavor,
   defaultSize,
   flavorOf,
-  formatVariantLabel,
   productPrice,
   type Product,
 } from "../data/products";
@@ -82,10 +80,6 @@ export function ProductOptionCard({ product, mark }: CardProps) {
         }
         onAddToCart={() => {
           add(product.id, { flavor: flavorId, size });
-          const label = formatVariantLabel(product, flavorId, size);
-          const message =
-            `Hi Aura Clean,\nI want to order:\n• ${label} (₹${price})\n\nPlease share availability and delivery details.`;
-          window.open(whatsappHref(message), "_blank", "noopener,noreferrer");
         }}
       />
     </li>

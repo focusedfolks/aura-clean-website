@@ -36,6 +36,8 @@ type CartContextValue = {
   count: number;
   open: boolean;
   setOpen: (open: boolean) => void;
+  toast: string | null;
+  clearToast: () => void;
   add: (id: ProductId, options?: AddOptions) => void;
   setQty: (key: string, qty: number) => void;
   remove: (key: string) => void;
@@ -75,10 +77,19 @@ function readStored(): CartLine[] {
 export function CartProvider({ children }: { children: ReactNode }) {
   const [lines, setLines] = useState<CartLine[]>(readStored);
   const [open, setOpen] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(lines));
   }, [lines]);
+
+  useEffect(() => {
+    if (!toast) return;
+    const timer = window.setTimeout(() => setToast(null), 2400);
+    return () => window.clearTimeout(timer);
+  }, [toast]);
+
+  const clearToast = useCallback(() => setToast(null), []);
 
   const add = useCallback((id: ProductId, options?: AddOptions) => {
     const product = findProduct(id);
@@ -96,7 +107,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
       return [...current, { key, id: resolveProductId(id), flavor, size, qty: 1 }];
     });
-    setOpen(true);
+    setToast("Added to cart successfully");
   }, []);
 
   const setQty = useCallback((key: string, qty: number) => {
@@ -118,8 +129,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
   );
 
   const value = useMemo(
-    () => ({ lines, count, open, setOpen, add, setQty, remove, clear }),
-    [lines, count, open, add, setQty, remove, clear],
+    () => ({ lines, count, open, setOpen, toast, clearToast, add, setQty, remove, clear }),
+    [lines, count, open, toast, clearToast, add, setQty, remove, clear],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

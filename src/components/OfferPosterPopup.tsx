@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
-import { whatsappHref } from "../data/contact";
 import { FEATURED_OFFER } from "../data/products";
 
 export const OFFER_POSTER_SRC = "/rabi-ul-awwal-offer.jpg";
@@ -14,7 +12,6 @@ export function OfferPosterDialog({
   onClose: () => void;
 }) {
   const { add } = useCart();
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (!open) return;
@@ -31,11 +28,7 @@ export function OfferPosterDialog({
 
   const grabCombo = () => {
     add(FEATURED_OFFER.id);
-    const message =
-      `Hi Aura Clean,\nI want to order:\n• ${FEATURED_OFFER.title} (${FEATURED_OFFER.price})\n\nPlease share availability and delivery details.`;
-    window.open(whatsappHref(message), "_blank", "noopener,noreferrer");
     onClose();
-    navigate("/offers");
   };
 
   if (!open) return null;
@@ -58,7 +51,7 @@ export function OfferPosterDialog({
         />
         <div className="offer-poster-actions">
           <button type="button" className="offer-poster-cta" onClick={grabCombo}>
-            Grab this combo
+            Add combo to cart
           </button>
           <button type="button" className="offer-poster-later" onClick={onClose}>
             Close

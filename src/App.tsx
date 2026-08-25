@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { CartDrawer } from "./components/CartDrawer";
+import { CartToast } from "./components/CartToast";
 import { Footer } from "./components/Footer";
 import { InstallPrompt } from "./components/InstallPrompt";
 import { Nav } from "./components/Nav";
@@ -30,6 +31,7 @@ export default function App() {
         </a>
         <Nav />
         <CartDrawer />
+        <CartToast />
         <InstallPrompt />
         <Routes>
           <Route path="/" element={<HomePage />} />

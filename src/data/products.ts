@@ -358,6 +358,7 @@ export const OFFERS: OfferDeal[] = [
 export const ALL_OFFERS: OfferDeal[] = [FEATURED_OFFER, ...OFFERS];
 
 function offerToProduct(offer: OfferDeal): Product {
+  const amount = Number(offer.price.replace(/[^\d.]/g, ""));
   return {
     id: offer.id,
     name: offer.title,
@@ -370,6 +371,11 @@ function offerToProduct(offer: OfferDeal): Product {
     spec: offer.includes.map((item) => item.label).join(" · "),
     volume: "Combo pack",
     price: offer.price,
+    prices: Number.isFinite(amount)
+      ? {
+          "Combo pack": amount,
+        }
+      : undefined,
     sizes: ["Combo pack"],
   };
 }
@@ -419,11 +425,20 @@ export function flavorOf(product: Product, flavorId?: string): ProductFlavor | u
 
 export function productPrice(product: Product, size?: string): number | undefined {
   const key = size ?? defaultSize(product);
-  return product.prices?.[key];
+  if (product.prices?.[key] != null) return product.prices[key];
+  if (product.price) {
+    const amount = Number(product.price.replace(/[^\d.]/g, ""));
+    return Number.isFinite(amount) ? amount : undefined;
+  }
+  return undefined;
 }
 
 export function formatRupee(amount: number): string {
   return `₹${amount}`;
+}
+
+export function lineUnitPrice(product: Product, size?: string): number {
+  return productPrice(product, size) ?? 0;
 }
 
 export function formatVariantLabel(

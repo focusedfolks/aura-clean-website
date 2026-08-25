@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import ProductCard from "@/components/smoothui/product-card";
 import { ArrowIcon } from "../components/icons";
 import { useCart } from "../context/CartContext";
-import { whatsappHref } from "../data/contact";
 import {
   FEATURED_OFFER,
   OFFERS,
@@ -37,12 +36,9 @@ function DealCta({ offer }: { offer: OfferDeal }) {
         add(offer.id);
         setBusy(true);
         window.setTimeout(() => setBusy(false), 1400);
-        const message =
-          `Hi Aura Clean,\nI want to order:\n• ${offer.title} (${offer.price})\n\nPlease share availability and delivery details.`;
-        window.open(whatsappHref(message), "_blank", "noopener,noreferrer");
       }}
     >
-      {busy ? "Opening WhatsApp…" : "Buy Now"}
+      {busy ? "Added to cart" : "Add to cart"}
       <span aria-hidden="true">
         <ArrowIcon />
       </span>
@@ -116,7 +112,7 @@ function OfferProductCard({ offer }: { offer: OfferDeal }) {
       badge={badge}
       className="offers-smooth-card"
       comingSoon={offer.comingSoon}
-      ctaLabel="Buy Now"
+      ctaLabel="Add to Cart"
       currency="₹"
       description={offer.blurb}
       hideWishlist
@@ -127,9 +123,6 @@ function OfferProductCard({ offer }: { offer: OfferDeal }) {
       title={offer.title}
       onAddToCart={() => {
         add(offer.id);
-        const message =
-          `Hi Aura Clean,\nI want to order:\n• ${offer.title} (${offer.price})\n\nPlease share availability and delivery details.`;
-        window.open(whatsappHref(message), "_blank", "noopener,noreferrer");
       }}
     />
   );

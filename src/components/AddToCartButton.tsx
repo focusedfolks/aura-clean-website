@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { whatsappHref } from "../data/contact";
 import {
   defaultFlavor,
   defaultSize,
@@ -30,19 +29,22 @@ export function AddToCartButton({ id, flavor, size, className }: Props) {
         add(id, { flavor, size });
         setAdded(true);
         window.setTimeout(() => setAdded(false), 1400);
-        const product = findProduct(id);
-        if (!product) return;
-        const resolvedFlavor = flavor ?? defaultFlavor(product);
-        const resolvedSize = size ?? defaultSize(product);
-        const label = formatVariantLabel(product, resolvedFlavor, resolvedSize);
-        const amount = productPrice(product, resolvedSize);
-        const price = amount != null ? ` (${formatRupee(amount)})` : product.price ? ` (${product.price})` : "";
-        const message =
-          `Hi Aura Clean,\nI want to order:\n• ${label}${price}\n\nPlease share availability and delivery details.`;
-        window.open(whatsappHref(message), "_blank", "noopener,noreferrer");
       }}
+      aria-label={
+        (() => {
+          const product = findProduct(id);
+          if (!product) return "Add to cart";
+          const resolvedFlavor = flavor ?? defaultFlavor(product);
+          const resolvedSize = size ?? defaultSize(product);
+          const amount = productPrice(product, resolvedSize);
+          const label = formatVariantLabel(product, resolvedFlavor, resolvedSize);
+          return amount != null
+            ? `Add ${label} ${formatRupee(amount)} to cart`
+            : `Add ${label} to cart`;
+        })()
+      }
     >
-      {added ? "Opening WhatsApp…" : "Add to cart"}
+      {added ? "Added to cart" : "Add to cart"}
     </button>
   );
 }

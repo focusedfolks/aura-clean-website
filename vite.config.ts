@@ -13,14 +13,14 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["aura-logo.png", "logo.png", "favicon.ico"],
+      includeAssets: ["aura-logo.png", "aura-logo-white.png", "logo.png", "apple-touch-icon.png"],
       manifest: {
         name: "Aura Clean",
         short_name: "Aura Clean",
         description:
           "Aura Clean Hand Wash and home care, Pure Hands, Pure Care. Shop combos and essentials.",
         theme_color: "#1c1408",
-        background_color: "#fff8ee",
+        background_color: "#1c1408",
         display: "standalone",
         orientation: "portrait-primary",
         scope: "/",

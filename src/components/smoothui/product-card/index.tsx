@@ -216,7 +216,7 @@ export default function ProductCard({
     if (comingSoon) return;
     setIsAdded(true);
     onAddToCart?.();
-    setTimeout(() => setIsAdded(false), 2000);
+    setTimeout(() => setIsAdded(false), 1400);
   };
 
   const handleWishlist = () => {
@@ -466,7 +466,7 @@ export default function ProductCard({
                     shouldReduceMotion ? { duration: 0 } : { duration: 0.15 }
                   }
                 >
-                  <CheckIcon /> Added
+                  <CheckIcon /> Added to cart
                 </motion.span>
               ) : (
                 <motion.span
