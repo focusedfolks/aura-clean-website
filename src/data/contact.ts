@@ -38,7 +38,7 @@ export const SOCIAL = [
   {
     id: "instagram",
     label: "Instagram",
-    href: "https://www.instagram.com/",
+    href: "https://www.instagram.com/auraclean.in/",
   },
   {
     id: "facebook",
