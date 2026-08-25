@@ -17,6 +17,7 @@ export interface ProductCardProps {
   imageFit?: "cover" | "contain";
   includes?: string[];
   media?: ReactNode;
+  options?: ReactNode;
   onAddToCart?: () => void;
   onWishlist?: () => void;
   originalPrice?: number;
@@ -192,6 +193,7 @@ export default function ProductCard({
   imageFit = "cover",
   includes,
   media,
+  options,
   onAddToCart,
   onWishlist,
   secondaryBadge,
@@ -401,6 +403,8 @@ export default function ProductCard({
             ))}
           </ul>
         ) : null}
+
+        {options}
 
         {rating !== undefined && <RatingStars rating={rating} title={title} />}
 

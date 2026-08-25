@@ -52,11 +52,12 @@ const CERTS = [
 ] as const;
 
 const START_MARK: Partial<Record<ProductId, string>> = {
-  "hand-wash": "3 flavours",
-  floor: "3 flavours",
+  "hand-wash": "3 fragrances",
+  floor: "3 fragrances",
   toilet: "2 sizes",
   bathroom: "2 sizes",
   laundry: "2 sizes",
+  dish: "Lemon",
 };
 
 const CHIP_LABELS: Partial<Record<CategoryId, string>> = {
@@ -148,13 +149,12 @@ export function ProductPage() {
         {list.length === 0 ? (
           <p className="catalog-empty">No products match that search.</p>
         ) : (
-          <ul className="product-grid">
+          <ul className="product-grid catalog-product-grid">
             {list.map((item) => (
               <ProductOptionCard
                 key={item.id}
                 product={item}
                 mark={START_MARK[item.id]}
-                layout="grid"
               />
             ))}
           </ul>

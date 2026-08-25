@@ -93,91 +93,28 @@ export type Product = {
   /** Default / summary volume shown before a size is picked. */
   volume: string;
   price?: string;
+  /** Retail price in ₹ keyed by size label (e.g. "500 ml"). */
+  prices?: Record<string, number>;
   flavors?: ProductFlavor[];
   sizes?: string[];
 };
 
 export const PRODUCTS: Product[] = [
   {
-    id: "hand-wash",
-    name: "Hand Wash",
-    category: "hand-wash",
-    src: "/product-handwash-charcoal.webp?v=11",
-    tone: "#222",
-    blurb: "Deep cleanse and lasting protection, pick your favourite fragrance.",
-    spec: "99.9% Cleaning Protection",
-    volume: "250 ml - 5 Ltr",
-    flavors: [
-      {
-        id: "charcoal",
-        label: "Charcoal",
-        src: "/product-handwash-charcoal.webp?v=11",
-        tone: "#222",
-      },
-      {
-        id: "lemon",
-        label: "Lemon",
-        src: "/product-handwash-lemon.webp",
-        tone: "#f0c400",
-      },
-      {
-        id: "rose",
-        label: "Rose",
-        src: "/product-handwash-rose.webp",
-        tone: "#e85a9b",
-      },
-    ],
-    sizes: ["250 ml", "500 ml", "600 ml", "5 Ltr"],
-  },
-  {
-    id: "toilet",
-    name: "Powerful Toilet Cleaner",
-    category: "toilet",
-    src: "/product-toilet.webp?v=3",
-    tone: "#1c4fa0",
-    blurb: "10x Power. Removes tough stains. Fresh fragrance. Deep cleaning.",
-    spec: "Kills 99.9% Germs",
-    volume: "500 ml - 1 Ltr",
-    sizes: ["500 ml", "1 Ltr"],
-  },
-  {
-    id: "bathroom",
-    name: "Disinfectant Bathroom Cleaner",
-    category: "bathroom",
-    src: "/product-bathroom.webp?v=3",
-    tone: "#6e1010",
-    blurb: "10X better cleaning for sinks, tiles and fittings.",
-    spec: "Kills 99.9% Germs",
-    volume: "500 ml - 1 Ltr",
-    sizes: ["500 ml", "1 Ltr"],
-  },
-  {
-    id: "laundry",
-    name: "Laundry Detergent Liquid",
-    category: "laundry",
-    src: "/product-laundry.webp?v=7",
-    tone: "#3d7ad6",
-    blurb: "Deep clean. Fresh fragrance. Gentle on fabric.",
-    spec: "1 Ltr · 5 Ltr",
-    volume: "1 Ltr - 5 Ltr",
-    sizes: ["1 Ltr", "5 Ltr"],
-  },
-  {
     id: "floor",
     name: "Premium Floor Cleaner",
     category: "floor",
-    src: "/product-floor-lavender.webp?v=1",
-    tone: "#7b4fd1",
-    blurb: "Plant-extract powered shine, pick Lavender, Lemon Fresh, or Rose Fresh.",
+    src: "/product-floor-lemon.webp?v=5",
+    tone: "#f0c400",
+    blurb: "Plant-extract powered shine, pick Lemon, Rose, or Lavender.",
     spec: "10X Litter & Bacteria Stronger Clean",
     volume: "500 ml - 1 Ltr",
+    price: "₹59",
+    prices: {
+      "500 ml": 59,
+      "1 Ltr": 95,
+    },
     flavors: [
-      {
-        id: "lavender",
-        label: "Lavender",
-        src: "/product-floor-lavender.webp?v=1",
-        tone: "#7b4fd1",
-      },
       {
         id: "lemon",
         label: "Lemon",
@@ -189,6 +126,12 @@ export const PRODUCTS: Product[] = [
         label: "Rose",
         src: "/product-floor-rose.webp?v=8",
         tone: "#e85a9b",
+      },
+      {
+        id: "lavender",
+        label: "Lavender",
+        src: "/product-floor-lavender.webp?v=1",
+        tone: "#7b4fd1",
       },
     ],
     sizes: ["500 ml", "1 Ltr"],
@@ -202,7 +145,128 @@ export const PRODUCTS: Product[] = [
     blurb: "Tough on grease. Gentle on hands. Fresh lemon fragrance.",
     spec: "Powerful Grease Removal",
     volume: "1 Ltr",
+    price: "₹95",
+    prices: {
+      "1 Ltr": 95,
+    },
+    flavors: [
+      {
+        id: "lemon",
+        label: "Lemon",
+        src: "/product-dish.webp?v=3",
+        tone: "#c5a000",
+      },
+    ],
     sizes: ["1 Ltr"],
+  },
+  {
+    id: "hand-wash",
+    name: "Hand Wash",
+    category: "hand-wash",
+    src: "/product-handwash-rose.webp",
+    tone: "#e85a9b",
+    blurb: "Deep cleanse and lasting protection, pick your favourite fragrance.",
+    spec: "99.9% Cleaning Protection",
+    volume: "250 ml - 5 Ltr",
+    price: "₹59",
+    prices: {
+      "250 ml": 59,
+      "500 ml": 69,
+      "5 Ltr": 389,
+    },
+    flavors: [
+      {
+        id: "rose",
+        label: "Rose",
+        src: "/product-handwash-rose.webp",
+        tone: "#e85a9b",
+      },
+      {
+        id: "charcoal",
+        label: "Charcoal",
+        src: "/product-handwash-charcoal.webp?v=11",
+        tone: "#222",
+      },
+      {
+        id: "lemon",
+        label: "Lemon",
+        src: "/product-handwash-lemon.webp",
+        tone: "#f0c400",
+      },
+    ],
+    sizes: ["250 ml", "500 ml", "5 Ltr"],
+  },
+  {
+    id: "toilet",
+    name: "Powerful Toilet Cleaner",
+    category: "toilet",
+    src: "/product-toilet.webp?v=3",
+    tone: "#1c4fa0",
+    blurb: "10x Power. Removes tough stains. Fresh fragrance. Deep cleaning.",
+    spec: "Kills 99.9% Germs",
+    volume: "500 ml - 1 Ltr",
+    price: "₹59",
+    prices: {
+      "500 ml": 59,
+      "1 Ltr": 99,
+    },
+    flavors: [
+      {
+        id: "unscented",
+        label: "Unscented",
+        src: "/product-toilet.webp?v=3",
+        tone: "#1c4fa0",
+      },
+    ],
+    sizes: ["500 ml", "1 Ltr"],
+  },
+  {
+    id: "bathroom",
+    name: "Disinfectant Bathroom Cleaner",
+    category: "bathroom",
+    src: "/product-bathroom.webp?v=3",
+    tone: "#6e1010",
+    blurb: "10X better cleaning for sinks, tiles and fittings.",
+    spec: "Kills 99.9% Germs",
+    volume: "500 ml - 1 Ltr",
+    price: "₹59",
+    prices: {
+      "500 ml": 59,
+      "1 Ltr": 99,
+    },
+    flavors: [
+      {
+        id: "unscented",
+        label: "Unscented",
+        src: "/product-bathroom.webp?v=3",
+        tone: "#6e1010",
+      },
+    ],
+    sizes: ["500 ml", "1 Ltr"],
+  },
+  {
+    id: "laundry",
+    name: "Laundry Detergent Liquid",
+    category: "laundry",
+    src: "/product-laundry.webp?v=7",
+    tone: "#3d7ad6",
+    blurb: "Deep clean. Fresh fragrance. Gentle on fabric.",
+    spec: "1 Ltr · 5 Ltr",
+    volume: "1 Ltr - 5 Ltr",
+    price: "₹99",
+    prices: {
+      "1 Ltr": 99,
+      "5 Ltr": 399,
+    },
+    flavors: [
+      {
+        id: "unscented",
+        label: "Unscented",
+        src: "/product-laundry.webp?v=7",
+        tone: "#3d7ad6",
+      },
+    ],
+    sizes: ["1 Ltr", "5 Ltr"],
   },
 ];
 
@@ -353,6 +417,15 @@ export function flavorOf(product: Product, flavorId?: string): ProductFlavor | u
   return product.flavors.find((item) => item.id === flavorId) ?? product.flavors[0];
 }
 
+export function productPrice(product: Product, size?: string): number | undefined {
+  const key = size ?? defaultSize(product);
+  return product.prices?.[key];
+}
+
+export function formatRupee(amount: number): string {
+  return `₹${amount}`;
+}
+
 export function formatVariantLabel(
   product: Product,
   flavorId?: string,
@@ -371,12 +444,12 @@ export const HAND_WASH = PRODUCTS.filter((item) => item.category === "hand-wash"
 export const RANGE_PRODUCTS = PRODUCTS.filter((item) => item.category !== "hand-wash");
 
 export const CATALOG_ORDER: ProductId[] = [
+  "floor",
+  "dish",
   "hand-wash",
   "toilet",
   "bathroom",
   "laundry",
-  "floor",
-  "dish",
 ];
 
 export const CATEGORIES: { id: CategoryId; label: string }[] = [

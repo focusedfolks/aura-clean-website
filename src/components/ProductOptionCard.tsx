@@ -1,106 +1,93 @@
 import { useState } from "react";
+import ProductCard from "@/components/smoothui/product-card";
+import { useCart } from "../context/CartContext";
+import { whatsappHref } from "../data/contact";
 import {
   defaultFlavor,
   defaultSize,
   flavorOf,
   formatVariantLabel,
+  productPrice,
   type Product,
 } from "../data/products";
-import { AddToCartButton } from "./AddToCartButton";
 
 type CardProps = {
   product: Product;
   mark?: string;
-  layout?: "grid" | "range";
 };
 
-function flavorInk(flavorId?: string, tone?: string): string {
-  if (
-    flavorId === "lemon" ||
-    tone === "#e6b422" ||
-    tone === "#c5a000" ||
-    tone === "#c4a000" ||
-    tone === "#f0c400"
-  ) {
-    return "#1c1408";
-  }
-  return "#fff8ee";
-}
-
-export function ProductOptionCard({ product, mark, layout = "grid" }: CardProps) {
+export function ProductOptionCard({ product, mark }: CardProps) {
+  const { add } = useCart();
   const [flavorId, setFlavorId] = useState(defaultFlavor(product));
   const [size, setSize] = useState(defaultSize(product));
   const active = flavorOf(product, flavorId);
   const src = active?.src ?? product.src;
-  const tone = active?.tone ?? product.tone;
-  const ink = flavorInk(flavorId, tone);
-
-  const isRange = layout === "range";
+  const price = productPrice(product, size) ?? 0;
+  const showFlavors = Boolean(product.flavors && product.flavors.length > 0);
+  const showSizes = Boolean(product.sizes && product.sizes.length > 0);
 
   return (
-    <li
-      id={product.id}
-      data-sku={product.id}
-      data-flavor={flavorId ?? ""}
-      style={{ background: tone, color: ink }}
-    >
-      {mark ? <em className="product-mark">{mark}</em> : null}
-      <div className={isRange ? "range-stage" : "product-visual"}>
-        <img src={src} alt={formatVariantLabel(product, flavorId, size)} width={320} height={520} />
-      </div>
-      <div className={isRange ? undefined : "product-meta"}>
-        <span className={isRange ? "range-vol" : "product-vol"}>{size}</span>
-        <h3>{product.name}</h3>
-        <p>{product.blurb}</p>
-        {!isRange ? <strong className="product-spec">{product.spec}</strong> : null}
+    <li id={product.id} data-sku={product.id} data-flavor={flavorId ?? ""} className="catalog-card-item">
+      <ProductCard
+        badge={mark}
+        className="catalog-smooth-card"
+        ctaLabel="Add to Cart"
+        currency="₹"
+        description={product.blurb}
+        hideWishlist
+        image={src}
+        imageFit="contain"
+        price={price}
+        title={product.name}
+        options={
+          <div className="catalog-card-options">
+            {showFlavors ? (
+              <div className="catalog-option-block">
+                <p className="catalog-option-label">Fragrance</p>
+                <div className="catalog-option-row" role="group" aria-label={`${product.name} fragrance`}>
+                  {product.flavors!.map((item) => (
+                    <button
+                      key={item.id}
+                      type="button"
+                      className={`catalog-option-chip${flavorId === item.id ? " is-active" : ""}`}
+                      aria-pressed={flavorId === item.id}
+                      onClick={() => setFlavorId(item.id)}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : null}
 
-        {product.flavors && product.flavors.length > 1 ? (
-          <div className="option-block">
-            <p className="option-label">Flavour</p>
-            <div className="option-row" role="group" aria-label={`${product.name} flavour`}>
-              {product.flavors.map((item) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  className={`option-chip${flavorId === item.id ? " is-active" : ""}`}
-                  aria-pressed={flavorId === item.id}
-                  onClick={() => setFlavorId(item.id)}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
+            {showSizes ? (
+              <div className="catalog-option-block">
+                <p className="catalog-option-label">Size</p>
+                <div className="catalog-option-row" role="group" aria-label={`${product.name} size`}>
+                  {product.sizes!.map((item) => (
+                    <button
+                      key={item}
+                      type="button"
+                      className={`catalog-option-chip${size === item ? " is-active" : ""}`}
+                      aria-pressed={size === item}
+                      onClick={() => setSize(item)}
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </div>
-        ) : null}
-
-        {product.sizes && product.sizes.length > 1 ? (
-          <div className="option-block">
-            <p className="option-label">Size</p>
-            <div className="option-row" role="group" aria-label={`${product.name} size`}>
-              {product.sizes.map((item) => (
-                <button
-                  key={item}
-                  type="button"
-                  className={`option-chip${size === item ? " is-active" : ""}`}
-                  aria-pressed={size === item}
-                  onClick={() => setSize(item)}
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
-          </div>
-        ) : product.sizes?.length === 1 ? (
-          <div className="option-block">
-            <p className="option-label">Size</p>
-            <div className="option-row" role="group" aria-label={`${product.name} size`}>
-              <span className="option-chip is-active is-static">{product.sizes[0]}</span>
-            </div>
-          </div>
-        ) : null}
-
-        <AddToCartButton id={product.id} flavor={flavorId} size={size} />
-      </div>
+        }
+        onAddToCart={() => {
+          add(product.id, { flavor: flavorId, size });
+          const label = formatVariantLabel(product, flavorId, size);
+          const message =
+            `Hi Aura Clean,\nI want to order:\n• ${label} (₹${price})\n\nPlease share availability and delivery details.`;
+          window.open(whatsappHref(message), "_blank", "noopener,noreferrer");
+        }}
+      />
     </li>
   );
 }

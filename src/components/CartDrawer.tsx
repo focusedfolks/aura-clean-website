@@ -4,7 +4,9 @@ import { whatsappHref } from "../data/contact";
 import {
   findProduct,
   flavorOf,
+  formatRupee,
   formatVariantLabel,
+  productPrice,
 } from "../data/products";
 import { useCart } from "../context/CartContext";
 import { CloseIcon } from "./icons";
@@ -35,7 +37,8 @@ export function CartDrawer() {
   const orderLines = items
     .map(({ qty, product, flavor, size }) => {
       const label = formatVariantLabel(product, flavor, size);
-      const price = product.price ? ` - ${product.price}` : "";
+      const amount = productPrice(product, size);
+      const price = amount != null ? ` - ${formatRupee(amount)}` : product.price ? ` - ${product.price}` : "";
       return `• ${label} x${qty}${price}`;
     })
     .join("\n");
@@ -69,13 +72,18 @@ export function CartDrawer() {
           <ul className="cart-lines">
             {items.map(({ key, qty, product, flavor, size }) => {
               const image = flavorOf(product, flavor)?.src ?? product.src;
+              const amount = productPrice(product, size);
               return (
                 <li key={key}>
                   <img src={image} alt="" width={72} height={120} />
                   <div>
                     <strong>{formatVariantLabel(product, flavor, size)}</strong>
                     <span>
-                      {product.price ? `${product.price} · ${size}` : size}
+                      {amount != null
+                        ? `${formatRupee(amount)} · ${size}`
+                        : product.price
+                          ? `${product.price} · ${size}`
+                          : size}
                     </span>
                     <div className="cart-qty">
                       <button type="button" onClick={() => setQty(key, qty - 1)} aria-label="Decrease quantity">

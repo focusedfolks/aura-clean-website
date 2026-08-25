@@ -43,6 +43,6 @@ export const SOCIAL = [
   {
     id: "facebook",
     label: "Facebook",
-    href: "https://www.facebook.com/",
+    href: "https://www.facebook.com/auraclean.in",
   },
 ] as const;

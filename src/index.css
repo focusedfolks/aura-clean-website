@@ -3065,6 +3065,100 @@ html[data-hero="bathroom"] { --hero-ink: #fff4f6; }
   list-style: none;
 }
 
+.catalog-product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.catalog-card-item {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: inherit !important;
+  overflow: visible;
+}
+
+.catalog-card-item:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.catalog-smooth-card {
+  height: 100%;
+}
+
+.catalog-smooth-card .relative.aspect-square {
+  background: #f3eadc;
+}
+
+.catalog-card-options {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 0.15rem;
+}
+
+.catalog-option-block {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.catalog-option-label {
+  margin: 0;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(28, 20, 8, 0.5);
+}
+
+.catalog-option-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.catalog-option-chip {
+  min-height: 30px;
+  padding: 0.28rem 0.7rem;
+  border: 1px solid rgba(28, 20, 8, 0.12);
+  border-radius: 999px;
+  background: #fff;
+  color: #1c1408;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.catalog-option-chip:hover {
+  border-color: rgba(28, 20, 8, 0.28);
+}
+
+.catalog-option-chip.is-active {
+  background: #1c1408;
+  border-color: #1c1408;
+  color: #fff8ee;
+}
+
+@media (max-width: 1023px) {
+  .catalog-product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .catalog-product-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .product-grid > li {
   position: relative;
   display: flex;

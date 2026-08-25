@@ -53,9 +53,9 @@ export function HomeRest() {
           <h2>Our complete cleaning range</h2>
           <p>Six product lines. Flavours and sizes you can pick, from the basin to the floor.</p>
         </header>
-        <ul className="range-grid">
+        <ul className="range-grid catalog-product-grid">
           {COLLECTION.map((item) => (
-            <ProductOptionCard key={item.id} product={item} layout="range" />
+            <ProductOptionCard key={item.id} product={item} />
           ))}
         </ul>
       </section>

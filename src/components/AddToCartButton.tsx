@@ -4,7 +4,9 @@ import {
   defaultFlavor,
   defaultSize,
   findProduct,
+  formatRupee,
   formatVariantLabel,
+  productPrice,
   type ProductId,
 } from "../data/products";
 import { useCart } from "../context/CartContext";
@@ -30,12 +32,11 @@ export function AddToCartButton({ id, flavor, size, className }: Props) {
         window.setTimeout(() => setAdded(false), 1400);
         const product = findProduct(id);
         if (!product) return;
-        const label = formatVariantLabel(
-          product,
-          flavor ?? defaultFlavor(product),
-          size ?? defaultSize(product),
-        );
-        const price = product.price ? ` (${product.price})` : "";
+        const resolvedFlavor = flavor ?? defaultFlavor(product);
+        const resolvedSize = size ?? defaultSize(product);
+        const label = formatVariantLabel(product, resolvedFlavor, resolvedSize);
+        const amount = productPrice(product, resolvedSize);
+        const price = amount != null ? ` (${formatRupee(amount)})` : product.price ? ` (${product.price})` : "";
         const message =
           `Hi Aura Clean,\nI want to order:\n• ${label}${price}\n\nPlease share availability and delivery details.`;
         window.open(whatsappHref(message), "_blank", "noopener,noreferrer");
