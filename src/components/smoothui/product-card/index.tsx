@@ -270,7 +270,7 @@ export default function ProductCard({
             alt={title}
             className={cn(
               "h-full w-full",
-              imageFit === "contain" ? "object-contain p-6" : "object-cover",
+              imageFit === "contain" ? "object-contain p-3 sm:p-4" : "object-cover",
               !shouldReduceMotion &&
                 "transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]",
               isHoverDevice && !shouldReduceMotion && "group-hover:scale-105"
