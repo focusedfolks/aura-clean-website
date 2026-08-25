@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import ProductCard from "@/components/smoothui/product-card";
-import { OfferPosterDialog, OFFER_POSTER_SRC } from "../components/OfferPosterPopup";
 import { ArrowIcon } from "../components/icons";
 import { useCart } from "../context/CartContext";
 import { whatsappHref } from "../data/contact";
@@ -137,11 +136,8 @@ function OfferProductCard({ offer }: { offer: OfferDeal }) {
 }
 
 export function OffersPage() {
-  const [posterOpen, setPosterOpen] = useState(false);
-
   return (
     <main id="main" className="lux-page offers-page">
-      <OfferPosterDialog open={posterOpen} onClose={() => setPosterOpen(false)} />
       <header className="offers-hero">
         <p className="lux-kicker">Offers & combos</p>
         <h1>
@@ -154,21 +150,6 @@ export function OffersPage() {
           washroom, and everyday cleaning.
         </p>
       </header>
-
-      <button
-        type="button"
-        className="offers-poster-teaser"
-        onClick={() => setPosterOpen(true)}
-        aria-label="Open Rabi Ul Awwal offer poster"
-      >
-        <img
-          src={OFFER_POSTER_SRC}
-          alt="Rabi Ul Awwal Offer poster, 6-in-1 combo pack for ₹349"
-          width={720}
-          height={1024}
-        />
-        <span>Tap to view full poster</span>
-      </button>
 
       <FeaturedDeal offer={FEATURED_OFFER} />
 

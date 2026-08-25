@@ -1,22 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { whatsappHref } from "../data/contact";
+import { FEATURED_OFFER } from "../data/products";
 
 export const OFFER_POSTER_SRC = "/rabi-ul-awwal-offer.jpg";
-const DISMISS_KEY = "aura-rabi-poster-dismissed-at";
-const DISMISS_HOURS = 12;
-
-function wasDismissedRecently() {
-  try {
-    const raw = localStorage.getItem(DISMISS_KEY);
-    if (!raw) return false;
-    const at = Number(raw);
-    if (!Number.isFinite(at)) return false;
-    return Date.now() - at < DISMISS_HOURS * 60 * 60 * 1000;
-  } catch {
-    return false;
-  }
-}
 
 export function OfferPosterDialog({
   open,
@@ -41,6 +29,15 @@ export function OfferPosterDialog({
     };
   }, [open, onClose]);
 
+  const grabCombo = () => {
+    add(FEATURED_OFFER.id);
+    const message =
+      `Hi Aura Clean,\nI want to order:\n• ${FEATURED_OFFER.title} (${FEATURED_OFFER.price})\n\nPlease share availability and delivery details.`;
+    window.open(whatsappHref(message), "_blank", "noopener,noreferrer");
+    onClose();
+    navigate("/offers");
+  };
+
   if (!open) return null;
 
   return (
@@ -60,15 +57,7 @@ export function OfferPosterDialog({
           height={1024}
         />
         <div className="offer-poster-actions">
-          <button
-            type="button"
-            className="offer-poster-cta"
-            onClick={() => {
-              add("combo");
-              onClose();
-              navigate("/offers");
-            }}
-          >
+          <button type="button" className="offer-poster-cta" onClick={grabCombo}>
             Grab this combo
           </button>
           <button type="button" className="offer-poster-later" onClick={onClose}>
@@ -80,25 +69,17 @@ export function OfferPosterDialog({
   );
 }
 
+/** Home page only — shows the offer poster every time you land on home. */
 export function OfferPosterPopup() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (wasDismissedRecently()) {
-      window.dispatchEvent(new Event("aura-offer-popup-ready"));
-      return;
-    }
     const timer = window.setTimeout(() => setOpen(true), 700);
     return () => window.clearTimeout(timer);
   }, []);
 
   const close = () => {
     setOpen(false);
-    try {
-      localStorage.setItem(DISMISS_KEY, String(Date.now()));
-    } catch {
-      /* ignore */
-    }
     window.dispatchEvent(new Event("aura-offer-popup-ready"));
   };
 

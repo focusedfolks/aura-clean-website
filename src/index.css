@@ -4929,34 +4929,6 @@ html[data-hero="bathroom"] { --hero-ink: #fff4f6; }
   color: #1c1408;
 }
 
-.offers-poster-teaser {
-  display: block;
-  width: min(100%, 520px);
-  margin: 0 auto 1.5rem;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  text-align: center;
-}
-
-.offers-poster-teaser img {
-  width: 100%;
-  height: auto;
-  border-radius: 18px;
-  box-shadow: 0 18px 40px rgba(28, 20, 8, 0.14);
-}
-
-.offers-poster-teaser span {
-  display: inline-block;
-  margin-top: 0.55rem;
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(28, 20, 8, 0.55);
-}
-
 /* ------------------------------------------------------------------ */
 /* Mobile / Android polish                                             */
 /* ------------------------------------------------------------------ */
