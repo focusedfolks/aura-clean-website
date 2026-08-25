@@ -49,9 +49,15 @@ function DealCta({ offer }: { offer: OfferDeal }) {
 function DealPrice({ offer }: { offer: OfferDeal }) {
   return (
     <div className="offers-price-row">
+      {offer.was ? (
+        <p className="offers-price-was">
+          Original <s>{offer.was}</s>
+        </p>
+      ) : null}
       <p className="offers-price-now">
-        Special Combo Price <strong>{offer.price}</strong>
+        Offer price <strong>{offer.price}</strong>
       </p>
+      {offer.saveLabel ? <span className="offers-save-pill">{offer.saveLabel}</span> : null}
     </div>
   );
 }
@@ -84,7 +90,7 @@ function FeaturedDeal({ offer }: { offer: OfferDeal }) {
     >
       <div className="offers-featured-glow" aria-hidden="true" />
       <div className="offers-featured-copy">
-        <em className="offers-badge">{offer.badge}</em>
+        <em className="offers-badge is-save">{offer.badge}</em>
         <p className="lux-kicker">Home care pack</p>
         <h2>{offer.title}</h2>
         <p className="offers-lead">{offer.blurb}</p>
@@ -103,9 +109,13 @@ function FeaturedDeal({ offer }: { offer: OfferDeal }) {
 
 function OfferProductCard({ offer }: { offer: OfferDeal }) {
   const { add } = useCart();
-  const badge = offer.gift ? "🎁 FREE 250ML HANDWASH" : offer.comingSoon ? "Coming Soon" : offer.badge;
+  const badge = offer.comingSoon
+    ? "Coming Soon"
+    : offer.gift
+      ? "🎁 FREE 250ML HANDWASH"
+      : offer.badge;
   const secondaryBadge =
-    offer.gift && offer.comingSoon ? "Coming Soon" : undefined;
+    offer.comingSoon && offer.gift ? "🎁 FREE 250ML HANDWASH" : undefined;
 
   return (
     <ProductCard
@@ -115,6 +125,7 @@ function OfferProductCard({ offer }: { offer: OfferDeal }) {
       ctaLabel="Add to Cart"
       currency="₹"
       description={offer.blurb}
+      giftNote={offer.gift}
       hideWishlist
       includes={offer.includes.map((item) => item.label)}
       media={<BottleStack offer={offer} />}

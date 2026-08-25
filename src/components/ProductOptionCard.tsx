@@ -20,6 +20,7 @@ export function ProductOptionCard({ product, mark }: CardProps) {
   const [size, setSize] = useState(defaultSize(product));
   const active = flavorOf(product, flavorId);
   const src = active?.src ?? product.src;
+  const imageBg = active?.tone ?? product.tone;
   const price = productPrice(product, size) ?? 0;
   const showFlavors = Boolean(product.flavors && product.flavors.length > 0);
   const showSizes = Boolean(product.sizes && product.sizes.length > 0);
@@ -34,6 +35,7 @@ export function ProductOptionCard({ product, mark }: CardProps) {
         description={product.blurb}
         hideWishlist
         image={src}
+        imageBg={imageBg}
         imageFit="contain"
         price={price}
         title={product.name}

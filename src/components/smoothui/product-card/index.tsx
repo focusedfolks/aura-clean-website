@@ -12,8 +12,10 @@ export interface ProductCardProps {
   ctaLabel?: string;
   currency?: string;
   description?: string;
+  giftNote?: string;
   hideWishlist?: boolean;
   image?: string;
+  imageBg?: string;
   imageFit?: "cover" | "contain";
   includes?: string[];
   media?: ReactNode;
@@ -23,6 +25,7 @@ export interface ProductCardProps {
   originalPrice?: number;
   price: number;
   rating?: number;
+  saveBadge?: string;
   secondaryBadge?: string;
   title: string;
 }
@@ -189,13 +192,16 @@ export default function ProductCard({
   comingSoon = false,
   ctaLabel,
   description,
+  giftNote,
   hideWishlist = false,
+  imageBg,
   imageFit = "cover",
   includes,
   media,
   options,
   onAddToCart,
   onWishlist,
+  saveBadge,
   secondaryBadge,
   className,
 }: ProductCardProps) {
@@ -253,7 +259,13 @@ export default function ProductCard({
       }
     >
       {/* Image — full bleed */}
-      <div className="relative aspect-square overflow-hidden bg-muted">
+      <div
+        className={cn(
+          "product-card-media relative aspect-square overflow-hidden bg-muted",
+          imageBg && "product-card-media-dynamic"
+        )}
+        style={imageBg ? { backgroundColor: imageBg } : undefined}
+      >
         {media ? (
           <div
             className={cn(
@@ -302,14 +314,17 @@ export default function ProductCard({
                   "w-fit rounded-full px-2.5 py-1 font-semibold text-xs shadow-sm",
                   badge.toLowerCase().includes("coming")
                     ? "bg-amber-500 text-[#1c1408]"
-                    : badge.toLowerCase().includes("free") ||
-                        badge.toLowerCase().includes("gift")
-                      ? "bg-emerald-500 text-white"
-                      : badge.toLowerCase() === "sale"
-                        ? "bg-red-500 text-white"
-                        : badge.toLowerCase() === "new"
-                          ? "bg-emerald-500 text-white"
-                          : "bg-primary text-primary-foreground"
+                    : badge.toLowerCase().includes("you save") ||
+                        badge.includes("🔥")
+                      ? "bg-red-500 text-white"
+                      : badge.toLowerCase().includes("free") ||
+                          badge.toLowerCase().includes("gift")
+                        ? "bg-emerald-500 text-white"
+                        : badge.toLowerCase() === "sale"
+                          ? "bg-red-500 text-white"
+                          : badge.toLowerCase() === "new"
+                            ? "bg-emerald-500 text-white"
+                            : "bg-primary text-primary-foreground"
                 )}
                 initial={
                   shouldReduceMotion
@@ -406,23 +421,32 @@ export default function ProductCard({
 
         {options}
 
+        {giftNote ? (
+          <p className="product-card-gift" aria-label="Free gift included">
+            <span aria-hidden="true">🎁</span>
+            {giftNote}
+          </p>
+        ) : null}
+
         {rating !== undefined && <RatingStars rating={rating} title={title} />}
 
-        <div className="flex items-baseline gap-2">
+        <div className="flex flex-wrap items-baseline gap-2">
+          {hasDiscount ? (
+            <span className="text-muted-foreground text-sm line-through">
+              {currency}
+              {originalPrice}
+            </span>
+          ) : null}
           <span className="font-bold text-foreground text-xl tracking-tight">
             {currency}
             {price}
           </span>
-          {hasDiscount ? (
-            <>
-              <span className="text-muted-foreground text-sm line-through">
-                {currency}
-                {originalPrice}
-              </span>
-              <span className="rounded-md bg-red-50 px-1.5 py-0.5 font-semibold text-red-600 text-xs dark:bg-red-950/40 dark:text-red-400">
-                -{discountPercent}%
-              </span>
-            </>
+          {saveBadge ? (
+            <span className="product-card-save">{saveBadge}</span>
+          ) : hasDiscount ? (
+            <span className="rounded-md bg-red-50 px-1.5 py-0.5 font-semibold text-red-600 text-xs dark:bg-red-950/40 dark:text-red-400">
+              -{discountPercent}%
+            </span>
           ) : null}
         </div>
 
