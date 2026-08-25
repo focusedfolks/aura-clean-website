@@ -93,12 +93,15 @@ export type Product = {
   /** Default / summary volume shown before a size is picked. */
   volume: string;
   price?: string;
-  /** Retail price in ₹ keyed by size label (e.g. "500 ml"). */
+  /** Final selling price in ₹ keyed by size label (e.g. "500 ml"). */
   prices?: Record<string, number>;
+  /** Struck-through retail / MRP in ₹ keyed by size label. */
+  retailPrices?: Record<string, number>;
   flavors?: ProductFlavor[];
   sizes?: string[];
 };
 
+/** Catalog products — Floor and Dishwash are separated so they never sit side-by-side. */
 export const PRODUCTS: Product[] = [
   {
     id: "floor",
@@ -109,10 +112,14 @@ export const PRODUCTS: Product[] = [
     blurb: "Plant-extract powered shine, pick Lemon, Rose, or Lavender.",
     spec: "10X Litter & Bacteria Stronger Clean",
     volume: "500 ml - 1 Ltr",
-    price: "₹59",
-    prices: {
+    price: "₹53",
+    retailPrices: {
       "500 ml": 59,
       "1 Ltr": 95,
+    },
+    prices: {
+      "500 ml": 53,
+      "1 Ltr": 85,
     },
     flavors: [
       {
@@ -137,29 +144,6 @@ export const PRODUCTS: Product[] = [
     sizes: ["500 ml", "1 Ltr"],
   },
   {
-    id: "dish",
-    name: "Dish Wash Liquid",
-    category: "dish",
-    src: "/product-dish.webp?v=3",
-    tone: "#6E5600",
-    blurb: "Tough on grease. Gentle on hands. Fresh lemon fragrance.",
-    spec: "Powerful Grease Removal",
-    volume: "1 Ltr",
-    price: "₹95",
-    prices: {
-      "1 Ltr": 95,
-    },
-    flavors: [
-      {
-        id: "lemon",
-        label: "Lemon",
-        src: "/product-dish.webp?v=3",
-        tone: "#6E5600",
-      },
-    ],
-    sizes: ["1 Ltr"],
-  },
-  {
     id: "hand-wash",
     name: "Hand Wash",
     category: "hand-wash",
@@ -168,11 +152,16 @@ export const PRODUCTS: Product[] = [
     blurb: "Deep cleanse and lasting protection, pick your favourite fragrance.",
     spec: "99.9% Cleaning Protection",
     volume: "250 ml - 5 Ltr",
-    price: "₹59",
-    prices: {
+    price: "₹53",
+    retailPrices: {
       "250 ml": 59,
       "500 ml": 69,
       "5 Ltr": 389,
+    },
+    prices: {
+      "250 ml": 53,
+      "500 ml": 62,
+      "5 Ltr": 350,
     },
     flavors: [
       {
@@ -197,6 +186,32 @@ export const PRODUCTS: Product[] = [
     sizes: ["250 ml", "500 ml", "5 Ltr"],
   },
   {
+    id: "dish",
+    name: "Dish Wash Liquid",
+    category: "dish",
+    src: "/product-dish.webp?v=3",
+    tone: "#6E5600",
+    blurb: "Tough on grease. Gentle on hands. Fresh lemon fragrance.",
+    spec: "Powerful Grease Removal",
+    volume: "1 Ltr",
+    price: "₹85",
+    retailPrices: {
+      "1 Ltr": 95,
+    },
+    prices: {
+      "1 Ltr": 85,
+    },
+    flavors: [
+      {
+        id: "lemon",
+        label: "Lemon",
+        src: "/product-dish.webp?v=3",
+        tone: "#6E5600",
+      },
+    ],
+    sizes: ["1 Ltr"],
+  },
+  {
     id: "toilet",
     name: "Powerful Toilet Cleaner",
     category: "toilet",
@@ -205,10 +220,14 @@ export const PRODUCTS: Product[] = [
     blurb: "10x Power. Removes tough stains. Fresh fragrance. Deep cleaning.",
     spec: "Kills 99.9% Germs",
     volume: "500 ml - 1 Ltr",
-    price: "₹59",
-    prices: {
+    price: "₹53",
+    retailPrices: {
       "500 ml": 59,
       "1 Ltr": 99,
+    },
+    prices: {
+      "500 ml": 53,
+      "1 Ltr": 89,
     },
     flavors: [
       {
@@ -229,10 +248,14 @@ export const PRODUCTS: Product[] = [
     blurb: "10X better cleaning for sinks, tiles and fittings.",
     spec: "Kills 99.9% Germs",
     volume: "500 ml - 1 Ltr",
-    price: "₹59",
-    prices: {
+    price: "₹53",
+    retailPrices: {
       "500 ml": 59,
       "1 Ltr": 99,
+    },
+    prices: {
+      "500 ml": 53,
+      "1 Ltr": 89,
     },
     flavors: [
       {
@@ -253,10 +276,14 @@ export const PRODUCTS: Product[] = [
     blurb: "Deep clean. Fresh fragrance. Gentle on fabric.",
     spec: "1 Ltr · 5 Ltr",
     volume: "1 Ltr - 5 Ltr",
-    price: "₹99",
-    prices: {
+    price: "₹89",
+    retailPrices: {
       "1 Ltr": 99,
       "5 Ltr": 399,
+    },
+    prices: {
+      "1 Ltr": 89,
+      "5 Ltr": 359,
     },
     flavors: [
       {
@@ -435,6 +462,17 @@ export function productPrice(product: Product, size?: string): number | undefine
   return undefined;
 }
 
+/** Struck-through retail / MRP for catalog cards (sale price stays in `prices`). */
+export function productRetailPrice(
+  product: Product,
+  size?: string,
+): number | undefined {
+  const key = size ?? defaultSize(product);
+  return product.retailPrices?.[key];
+}
+
+export const CATALOG_DISCOUNT_LABEL = "10% OFF";
+
 export function formatRupee(amount: number): string {
   return `₹${amount}`;
 }
@@ -462,8 +500,8 @@ export const RANGE_PRODUCTS = PRODUCTS.filter((item) => item.category !== "hand-
 
 export const CATALOG_ORDER: ProductId[] = [
   "floor",
-  "dish",
   "hand-wash",
+  "dish",
   "toilet",
   "bathroom",
   "laundry",
@@ -471,10 +509,10 @@ export const CATALOG_ORDER: ProductId[] = [
 
 export const CATEGORIES: { id: CategoryId; label: string }[] = [
   { id: "all", label: "All Products" },
+  { id: "floor", label: "Premium Floor Cleaner" },
   { id: "hand-wash", label: "Hand Wash" },
+  { id: "dish", label: "Dish Wash Liquid" },
   { id: "toilet", label: "Powerful Toilet Cleaner" },
   { id: "bathroom", label: "Disinfectant Bathroom Cleaner" },
   { id: "laundry", label: "Laundry Detergent Liquid" },
-  { id: "floor", label: "Premium Floor Cleaner" },
-  { id: "dish", label: "Dish Wash Liquid" },
 ];

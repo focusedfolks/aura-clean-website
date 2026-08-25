@@ -2,10 +2,12 @@ import { useState } from "react";
 import ProductCard from "@/components/smoothui/product-card";
 import { useCart } from "../context/CartContext";
 import {
+  CATALOG_DISCOUNT_LABEL,
   defaultFlavor,
   defaultSize,
   flavorOf,
   productPrice,
+  productRetailPrice,
   type Product,
 } from "../data/products";
 
@@ -22,6 +24,7 @@ export function ProductOptionCard({ product, mark }: CardProps) {
   const src = active?.src ?? product.src;
   const imageBg = active?.tone ?? product.tone;
   const price = productPrice(product, size) ?? 0;
+  const originalPrice = productRetailPrice(product, size);
   const showFlavors = Boolean(product.flavors && product.flavors.length > 0);
   const showSizes = Boolean(product.sizes && product.sizes.length > 0);
 
@@ -37,7 +40,10 @@ export function ProductOptionCard({ product, mark }: CardProps) {
         image={src}
         imageBg={imageBg}
         imageFit="contain"
+        originalPrice={originalPrice}
         price={price}
+        priceLayout="retail"
+        saveBadge={originalPrice != null ? CATALOG_DISCOUNT_LABEL : undefined}
         title={product.name}
         options={
           <div className="catalog-card-options">

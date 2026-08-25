@@ -24,6 +24,8 @@ export interface ProductCardProps {
   onWishlist?: () => void;
   originalPrice?: number;
   price: number;
+  /** Catalog retail row: struck MRP → discount badge → bold sale price. */
+  priceLayout?: "default" | "retail";
   rating?: number;
   saveBadge?: string;
   secondaryBadge?: string;
@@ -201,6 +203,7 @@ export default function ProductCard({
   options,
   onAddToCart,
   onWishlist,
+  priceLayout = "default",
   saveBadge,
   secondaryBadge,
   className,
@@ -430,25 +433,52 @@ export default function ProductCard({
 
         {rating !== undefined && <RatingStars rating={rating} title={title} />}
 
-        <div className="flex flex-wrap items-baseline gap-2">
-          {hasDiscount ? (
-            <span className="text-muted-foreground text-sm line-through">
+        {priceLayout === "retail" ? (
+          <div
+            className="product-card-price-row"
+            aria-label={
+              hasDiscount
+                ? `${currency}${originalPrice} retail, ${saveBadge ?? `${discountPercent}% off`}, now ${currency}${price}`
+                : `${currency}${price}`
+            }
+          >
+            {hasDiscount ? (
+              <span className="product-card-price-was">
+                {currency}
+                {originalPrice}
+              </span>
+            ) : null}
+            {saveBadge ? (
+              <span className="product-card-discount">{saveBadge}</span>
+            ) : hasDiscount ? (
+              <span className="product-card-discount">{discountPercent}% OFF</span>
+            ) : null}
+            <span className="product-card-price-now">
               {currency}
-              {originalPrice}
+              {price}
             </span>
-          ) : null}
-          <span className="font-bold text-foreground text-xl tracking-tight">
-            {currency}
-            {price}
-          </span>
-          {saveBadge ? (
-            <span className="product-card-save">{saveBadge}</span>
-          ) : hasDiscount ? (
-            <span className="rounded-md bg-red-50 px-1.5 py-0.5 font-semibold text-red-600 text-xs dark:bg-red-950/40 dark:text-red-400">
-              -{discountPercent}%
+          </div>
+        ) : (
+          <div className="flex flex-wrap items-baseline gap-2">
+            {hasDiscount ? (
+              <span className="text-muted-foreground text-sm line-through">
+                {currency}
+                {originalPrice}
+              </span>
+            ) : null}
+            <span className="font-bold text-foreground text-xl tracking-tight">
+              {currency}
+              {price}
             </span>
-          ) : null}
-        </div>
+            {saveBadge ? (
+              <span className="product-card-save">{saveBadge}</span>
+            ) : hasDiscount ? (
+              <span className="rounded-md bg-red-50 px-1.5 py-0.5 font-semibold text-red-600 text-xs dark:bg-red-950/40 dark:text-red-400">
+                -{discountPercent}%
+              </span>
+            ) : null}
+          </div>
+        )}
 
         <div className="mt-auto pt-2">
           <SmoothButton

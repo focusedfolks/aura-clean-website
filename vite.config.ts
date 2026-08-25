@@ -19,8 +19,8 @@ export default defineConfig({
         short_name: "Aura Clean",
         description:
           "Aura Clean Hand Wash and home care, Pure Hands, Pure Care. Shop combos and essentials.",
-        theme_color: "#1c1408",
-        background_color: "#1c1408",
+        theme_color: "#ffffff",
+        background_color: "#ffffff",
         display: "standalone",
         orientation: "portrait-primary",
         scope: "/",

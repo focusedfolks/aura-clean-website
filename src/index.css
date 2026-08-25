@@ -3198,6 +3198,51 @@ html[data-hero="bathroom"] { --hero-ink: #fff4f6; }
   color: #fff8ee;
 }
 
+.product-card-price-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.65rem;
+  min-height: 2rem;
+  margin-top: 0.15rem;
+}
+
+.product-card-price-was {
+  color: rgba(28, 20, 8, 0.48);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: line-through;
+  text-decoration-thickness: 1.5px;
+}
+
+.product-card-discount {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.22rem 0.55rem;
+  border-radius: 0.4rem;
+  background: rgba(220, 38, 38, 0.1);
+  color: #b91c1c;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.product-card-price-now {
+  color: #1c1408;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.catalog-smooth-card .product-card-price-row {
+  padding-top: 0.15rem;
+  border-top: 1px solid rgba(28, 20, 8, 0.06);
+}
+
 @media (max-width: 1023px) {
   .catalog-product-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
