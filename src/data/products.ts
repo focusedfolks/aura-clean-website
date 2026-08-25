@@ -229,9 +229,9 @@ export const OFFERS: OfferDeal[] = [
     saveLabel: "You save ₹53",
     theme: "citrus",
     includes: [
-      { id: "dish", label: "1 Ltr Dishwash (₹95)" },
-      { id: "bathroom", label: "500 ml Bathroom Cleaner (₹59)" },
-      { id: "floor", label: "500 ml Floor Cleaner (₹59)", flavor: "lemon" },
+      { id: "dish", label: "1 Ltr Dishwash" },
+      { id: "bathroom", label: "500 ml Bathroom Cleaner" },
+      { id: "floor", label: "500 ml Floor Cleaner", flavor: "lemon" },
     ],
   },
   {
@@ -244,9 +244,9 @@ export const OFFERS: OfferDeal[] = [
     saveLabel: "You save ₹63",
     theme: "citrus",
     includes: [
-      { id: "dish", label: "1 Ltr Dishwash (₹95)" },
-      { id: "hand-wash", label: "500 ml Handwash (₹69)", flavor: "lemon" },
-      { id: "toilet", label: "500 ml Toilet Cleaner (₹59)" },
+      { id: "dish", label: "1 Ltr Dishwash" },
+      { id: "hand-wash", label: "500 ml Handwash", flavor: "lemon" },
+      { id: "toilet", label: "500 ml Toilet Cleaner" },
     ],
   },
   {
@@ -259,9 +259,9 @@ export const OFFERS: OfferDeal[] = [
     saveLabel: "You save ₹17",
     theme: "ink",
     includes: [
-      { id: "laundry", label: "1 Ltr Liquid Detergent (₹99)" },
-      { id: "hand-wash", label: "500 ml Handwash (₹69)", flavor: "charcoal" },
-      { id: "toilet", label: "500 ml Toilet Cleaner (₹59)" },
+      { id: "laundry", label: "1 Ltr Liquid Detergent" },
+      { id: "hand-wash", label: "500 ml Handwash", flavor: "charcoal" },
+      { id: "toilet", label: "500 ml Toilet Cleaner" },
     ],
   },
   {
@@ -274,9 +274,9 @@ export const OFFERS: OfferDeal[] = [
     saveLabel: "You save ₹7",
     theme: "ink",
     includes: [
-      { id: "laundry", label: "1 Ltr Liquid Detergent (₹99)" },
-      { id: "floor", label: "500 ml Floor Cleaner (₹59)", flavor: "lavender" },
-      { id: "bathroom", label: "500 ml Bathroom Cleaner (₹59)" },
+      { id: "laundry", label: "1 Ltr Liquid Detergent" },
+      { id: "floor", label: "500 ml Floor Cleaner", flavor: "lavender" },
+      { id: "bathroom", label: "500 ml Bathroom Cleaner" },
     ],
   },
   {
@@ -287,12 +287,12 @@ export const OFFERS: OfferDeal[] = [
     price: "₹250",
     was: "₹289",
     saveLabel: "You save ₹39",
-    gift: "FREE GIFT: 250ml Handwash",
+    gift: "FREE 250ML HANDWASH with this Combo",
     theme: "blush",
     includes: [
-      { id: "laundry", label: "1 Ltr Liquid Detergent (₹99)" },
-      { id: "dish", label: "1 Ltr Dishwash (₹95)" },
-      { id: "floor", label: "1 Ltr Floor Cleaner (₹95)", flavor: "lavender" },
+      { id: "laundry", label: "1 Ltr Liquid Detergent" },
+      { id: "dish", label: "1 Ltr Dishwash" },
+      { id: "floor", label: "1 Ltr Floor Cleaner", flavor: "lavender" },
     ],
   },
   {
@@ -306,9 +306,9 @@ export const OFFERS: OfferDeal[] = [
     gift: "FREE 250ML HANDWASH with this Combo",
     theme: "citrus",
     includes: [
-      { id: "laundry", label: "1 Ltr Liquid Detergent (₹99)" },
-      { id: "dish", label: "1 Ltr Dishwash (₹95)" },
-      { id: "toilet", label: "1 Ltr Toilet Cleaner (₹99)" },
+      { id: "laundry", label: "1 Ltr Liquid Detergent" },
+      { id: "dish", label: "1 Ltr Dishwash" },
+      { id: "toilet", label: "1 Ltr Toilet Cleaner" },
     ],
   },
   {
@@ -319,12 +319,12 @@ export const OFFERS: OfferDeal[] = [
     price: "₹280",
     was: "₹297",
     saveLabel: "You save ₹17",
-    gift: "CLAIM FREE GIFT: 250ml Handwash",
+    gift: "FREE 250ML HANDWASH with this Combo",
     theme: "ink",
     includes: [
-      { id: "laundry", label: "1 Ltr Liquid Detergent (₹99)" },
-      { id: "toilet", label: "1 Ltr Toilet Cleaner (₹99)" },
-      { id: "bathroom", label: "1 Ltr Bathroom Cleaner (₹99)" },
+      { id: "laundry", label: "1 Ltr Liquid Detergent" },
+      { id: "toilet", label: "1 Ltr Toilet Cleaner" },
+      { id: "bathroom", label: "1 Ltr Bathroom Cleaner" },
     ],
   },
 ];
