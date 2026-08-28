@@ -6,9 +6,12 @@ import { Footer } from "./components/Footer";
 import { InstallPrompt } from "./components/InstallPrompt";
 import { Nav } from "./components/Nav";
 import { CartProvider } from "./context/CartContext";
+import { Analytics } from "./components/Analytics";
+import { PageMeta } from "./components/PageMeta";
 import { AboutPage } from "./pages/AboutPage";
 import { ContactPage } from "./pages/ContactPage";
 import { HomePage } from "./pages/HomePage";
+import { NotFoundPage } from "./pages/NotFoundPage";
 import { OffersPage } from "./pages/OffersPage";
 import { ProductPage } from "./pages/ProductPage";
 import { WhyPage } from "./pages/WhyPage";
@@ -25,6 +28,8 @@ export default function App() {
   return (
     <BrowserRouter>
       <CartProvider>
+        <PageMeta />
+        <Analytics />
         <ScrollToTop />
         <a className="skip-link" href="#main">
           Skip to content
@@ -40,6 +45,7 @@ export default function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/why" element={<WhyPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <Footer />
       </CartProvider>

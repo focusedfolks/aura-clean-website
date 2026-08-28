@@ -112,7 +112,7 @@ export function InstallPrompt() {
           ×
         </button>
         <div className="install-prompt-brand">
-          <img src="/pwa-192.png" alt="" width={56} height={56} />
+          <img src="/pwa-192.png" alt="Aura Clean app icon" width={56} height={56} />
           <div>
             <p className="install-prompt-kicker">Aura Clean app</p>
             <h2 id="install-title">Install for faster shopping</h2>

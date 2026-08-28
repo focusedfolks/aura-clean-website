@@ -86,7 +86,14 @@ export function CartDrawer() {
               const image = flavorOf(product, flavor)?.src ?? product.src;
               return (
                 <li key={key}>
-                  <img src={image} alt="" width={72} height={120} />
+                  <img
+                    src={image}
+                    alt={formatVariantLabel(product, flavor, size)}
+                    width={72}
+                    height={120}
+                    loading="lazy"
+                    decoding="async"
+                  />
                   <div>
                     <strong>{formatVariantLabel(product, flavor, size)}</strong>
                     <span>
@@ -106,7 +113,12 @@ export function CartDrawer() {
                   </div>
                   <div className="cart-line-side">
                     <p className="cart-line-total">{formatRupee(lineTotal)}</p>
-                    <button type="button" className="cart-remove" onClick={() => remove(key)}>
+                    <button
+                      type="button"
+                      className="cart-remove"
+                      onClick={() => remove(key)}
+                      aria-label={`Remove ${formatVariantLabel(product, flavor, size)} from cart`}
+                    >
                       Remove
                     </button>
                   </div>

@@ -7,7 +7,7 @@ import {
   useReducedMotion,
   useTransform,
   type MotionValue,
-} from "framer-motion";
+} from "motion/react";
 import { ArrowIcon } from "./icons";
 
 const HOLD_MS = 3800;
@@ -298,6 +298,7 @@ function StageFloat({
       <motion.div
         animate={reduce ? undefined : { y: [0, item.layer === "front" ? -14 : -8, 0], rotate: [0, 6, 0] }}
         transition={{ duration: 5.2 + index * 0.35, delay: item.delay, repeat: Infinity, ease: "easeInOut" }}
+        aria-hidden="true"
       >
         <img
           src={item.src}

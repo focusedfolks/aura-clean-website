@@ -139,6 +139,65 @@ button, a { font: inherit; }
 
 .skip-link:focus { top: 1rem; }
 
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring, #f5c400);
+  outline-offset: 2px;
+}
+
+.nav-desktop a:focus-visible,
+.mobile-dock-link:focus-visible,
+.catalog-option-chip:focus-visible,
+.nav-cart:focus-visible,
+.cart-close:focus-visible,
+.cart-qty button:focus-visible,
+.install-prompt-close:focus-visible,
+.install-prompt-cta:focus-visible,
+.install-prompt-later:focus-visible {
+  outline: 2px solid var(--ring, #f5c400);
+  outline-offset: 2px;
+}
+
+.not-found-page {
+  min-height: min(72vh, 720px);
+  display: grid;
+  place-items: center;
+  padding: 2rem 1.25rem 4rem;
+}
+
+.not-found-hero {
+  max-width: 40rem;
+  text-align: center;
+}
+
+.not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+.cta-ghost {
+  background: transparent;
+  color: #1c1408;
+  border: 1.5px solid rgba(28, 20, 8, 0.18);
+  box-shadow: none;
+}
+
+.cta-ghost:hover {
+  border-color: rgba(28, 20, 8, 0.34);
+  background: rgba(28, 20, 8, 0.04);
+}
+
+.cta-ghost:focus-visible {
+  outline: 2px solid var(--ring, #f5c400);
+  outline-offset: 2px;
+}
+
 /* ------------------------------------------------------------------ */
 /* Nav                                                                 */
 /* ------------------------------------------------------------------ */
@@ -3166,7 +3225,7 @@ html[data-hero="bathroom"] { --hero-ink: #fff4f6; }
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(28, 20, 8, 0.5);
+  color: rgba(28, 20, 8, 0.62);
 }
 
 .catalog-option-row {

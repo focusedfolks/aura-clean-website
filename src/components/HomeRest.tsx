@@ -73,6 +73,8 @@ export function HomeRest() {
               alt="Aura Clean Premium Floor Cleaner used while mopping a bright living room"
               width={1200}
               height={900}
+              loading="lazy"
+              decoding="async"
             />
           </figure>
           <figure className="why-visual">
@@ -81,6 +83,8 @@ export function HomeRest() {
               alt="Aura Clean Dish Wash Liquid on a kitchen counter while washing dishes"
               width={1200}
               height={900}
+              loading="lazy"
+              decoding="async"
             />
           </figure>
         </div>
@@ -103,7 +107,7 @@ export function HomeRest() {
         <ul className="ing-bubbles">
           {INGS.map((item) => (
             <li key={item.name} data-tone={item.tone}>
-              <img src={item.src} alt="" width={256} height={256} />
+              <img src={item.src} alt={`${item.name} ingredient illustration`} width={256} height={256} loading="lazy" decoding="async" />
               <h3>{item.name}</h3>
               <p>{item.note}</p>
             </li>
@@ -130,9 +134,11 @@ export function HomeRest() {
       <section className="band touch-band">
         <img
           src="/family-hands.webp"
-          alt="Hands held together - care that belongs at home."
+          alt="Hands held together — care that belongs at home."
           width={1400}
           height={788}
+          loading="lazy"
+          decoding="async"
         />
         <div>
           <p className="lux-kicker">Atelier note</p>

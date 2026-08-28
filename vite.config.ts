@@ -13,7 +13,18 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["aura-logo.png", "aura-logo-white.png", "logo.png", "apple-touch-icon.png"],
+      includeAssets: [
+        "favicon.ico",
+        "favicon-32.png",
+        "og-image.jpg",
+        "site.webmanifest",
+        "robots.txt",
+        "sitemap.xml",
+        "aura-logo.png",
+        "aura-logo-white.png",
+        "logo.png",
+        "apple-touch-icon.png",
+      ],
       manifest: {
         name: "Aura Clean",
         short_name: "Aura Clean",
