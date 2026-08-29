@@ -55,25 +55,23 @@ export function InstallPrompt() {
 
     window.addEventListener("beforeinstallprompt", onBeforeInstall);
 
-    const startAfterOffer = () => {
+    const scheduleShow = () => {
       if (isIos()) {
         window.setTimeout(() => {
           setIosHint(true);
           show();
-        }, 1400);
+        }, 2800);
       } else {
         window.setTimeout(() => {
           if (!opened) show();
-        }, 2800);
+        }, 4200);
       }
     };
 
-    window.addEventListener("aura-offer-popup-ready", startAfterOffer, { once: true });
-    const fallback = window.setTimeout(startAfterOffer, 14000);
+    const fallback = window.setTimeout(scheduleShow, 8000);
 
     return () => {
       window.removeEventListener("beforeinstallprompt", onBeforeInstall);
-      window.removeEventListener("aura-offer-popup-ready", startAfterOffer);
       window.clearTimeout(fallback);
     };
   }, []);
