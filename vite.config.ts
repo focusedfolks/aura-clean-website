@@ -15,7 +15,9 @@ export default defineConfig({
       registerType: "autoUpdate",
       includeAssets: [
         "favicon.ico",
+        "favicon-16.png",
         "favicon-32.png",
+        "aura-clean-logo.png",
         "og-image.jpg",
         "site.webmanifest",
         "robots.txt",
