@@ -199,7 +199,7 @@ export const PRODUCTS: Product[] = [
       "1 Ltr": 95,
     },
     prices: {
-      "1 Ltr": 85,
+      "1 Ltr": 59,
     },
     flavors: [
       {
