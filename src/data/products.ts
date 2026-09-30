@@ -194,7 +194,7 @@ export const PRODUCTS: Product[] = [
     blurb: "Tough on grease. Gentle on hands. Fresh lemon fragrance.",
     spec: "Powerful Grease Removal",
     volume: "1 Ltr",
-    price: "₹85",
+    price: "₹59",
     retailPrices: {
       "1 Ltr": 95,
     },
